@@ -47,7 +47,7 @@ const formatRoleName = (role) => {
 /**
  * UserTable - Table component for displaying users in admin panel
  */
-const UserTable = ({ users, onEdit, onDelete, onRefresh }) => {
+const UserTable = ({ users, onEdit, onDelete }) => {
   const [sortField, setSortField] = useState('username');
   const [sortOrder, setSortOrder] = useState('asc'); // 'asc' or 'desc'
 

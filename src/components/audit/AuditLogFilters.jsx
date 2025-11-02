@@ -57,7 +57,7 @@ const AuditLogFilters = ({ filters, onFilterChange, onReset }) => {
     try {
       const date = new Date(dateString);
       return format(date, 'yyyy-MM-dd');
-    } catch (err) {
+    } catch {
       return '';
     }
   };

@@ -23,7 +23,6 @@ import PropTypes from 'prop-types';
  * @param {boolean} autohide - Auto-hide toast after delay
  */
 const Toast = ({
-  id,
   message,
   variant = 'info',
   title,

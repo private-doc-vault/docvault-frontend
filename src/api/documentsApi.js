@@ -155,7 +155,7 @@ const documentsApi = {
         responseType: 'blob',
       });
       return URL.createObjectURL(response.data);
-    } catch (error) {
+    } catch {
       // Return null if thumbnail doesn't exist
       return null;
     }

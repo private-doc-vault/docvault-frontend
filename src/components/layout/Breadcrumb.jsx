@@ -42,7 +42,7 @@ const AppBreadcrumb = ({ items = null }) => {
     const breadcrumbs = [{ label: 'Home', path: ROUTES.HOME, icon: <HouseDoor /> }];
 
     let currentPath = '';
-    pathSegments.forEach((segment, index) => {
+    pathSegments.forEach((segment) => {
       currentPath += `/${segment}`;
 
       // Check if this is a dynamic segment (e.g., document ID)

@@ -88,7 +88,7 @@ const SaveSearchModal = ({ show, onHide }) => {
 
           {!hasSearchCriteria && (
             <Alert variant="warning" className="mb-3">
-              You don't have any search criteria to save. Enter a search query or apply filters first.
+              You don&apos;t have any search criteria to save. Enter a search query or apply filters first.
             </Alert>
           )}
 

@@ -175,7 +175,7 @@ const RoleManagementPage = () => {
       {hasUnsavedChanges && (
         <Alert variant="warning" className="mb-4">
           <strong>Unsaved Changes:</strong> You have unsaved changes to role permissions.
-          Click "Save Changes" to persist your modifications.
+          Click &quot;Save Changes&quot; to persist your modifications.
         </Alert>
       )}
 

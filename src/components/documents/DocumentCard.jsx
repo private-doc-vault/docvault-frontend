@@ -21,24 +21,6 @@ import OcrStatusBadge from '../ocr/OcrStatusBadge';
 import OcrProgressBar from '../ocr/OcrProgressBar';
 
 /**
- * Get badge variant based on OCR status
- */
-const getStatusVariant = (status) => {
-  switch (status?.toLowerCase()) {
-    case 'completed':
-      return 'success';
-    case 'processing':
-      return 'primary';
-    case 'pending':
-      return 'secondary';
-    case 'failed':
-      return 'danger';
-    default:
-      return 'secondary';
-  }
-};
-
-/**
  * Format file size to human readable format
  */
 const formatFileSize = (bytes) => {

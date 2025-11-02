@@ -99,7 +99,6 @@ describe('LoginPage Integration Tests', () => {
       renderLoginPage();
 
       const emailInput = screen.getByLabelText(/email/i);
-      const submitButton = screen.getByRole('button', { name: /sign in/i });
 
       // Focus and blur email without entering value
       await user.click(emailInput);

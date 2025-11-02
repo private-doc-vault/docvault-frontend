@@ -84,4 +84,5 @@ PermissionSelector.propTypes = {
 };
 
 export default PermissionSelector;
+// eslint-disable-next-line react-refresh/only-export-components
 export { PERMISSION_LEVELS };

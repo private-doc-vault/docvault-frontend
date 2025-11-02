@@ -52,7 +52,7 @@ const AuditLogTable = ({ logs }) => {
   const formatTimestamp = (timestamp) => {
     try {
       return format(new Date(timestamp), 'MMM dd, yyyy HH:mm:ss');
-    } catch (err) {
+    } catch {
       return timestamp;
     }
   };

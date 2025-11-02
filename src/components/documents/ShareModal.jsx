@@ -202,7 +202,7 @@ const ShareModal = ({ show, onHide, document }) => {
   return (
     <Modal show={show} onHide={handleClose} size="lg">
       <Modal.Header closeButton>
-        <Modal.Title>Share "{document.title || document.filename}"</Modal.Title>
+        <Modal.Title>Share &quot;{document.title || document.filename}&quot;</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
@@ -263,7 +263,7 @@ const ShareModal = ({ show, onHide, document }) => {
 
                 {searchQuery.length >= 2 && !searching && searchResults.length === 0 && (
                   <Alert variant="info" className="mb-0">
-                    No users found matching "{searchQuery}"
+                    No users found matching &quot;{searchQuery}&quot;
                   </Alert>
                 )}
               </>

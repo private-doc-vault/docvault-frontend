@@ -13,7 +13,6 @@ const SearchExport = () => {
   const query = useSelector(selectQuery);
   const filters = useSelector(selectFilters);
   const [exporting, setExporting] = useState(false);
-  const [exportFormat, setExportFormat] = useState(null);
 
   /**
    * Handle export to a specific format
@@ -21,7 +20,6 @@ const SearchExport = () => {
   const handleExport = async (format) => {
     try {
       setExporting(true);
-      setExportFormat(format);
 
       // Call export API
       const blob = await searchApi.exportSearchResults({
@@ -52,7 +50,6 @@ const SearchExport = () => {
       alert('Failed to export search results. Please try again.');
     } finally {
       setExporting(false);
-      setExportFormat(null);
     }
   };
 

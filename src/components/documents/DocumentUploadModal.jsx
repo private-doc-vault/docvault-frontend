@@ -50,7 +50,6 @@ const DocumentUploadModal = ({ show, onHide, onSuccess }) => {
     uploadErrors,
     uploadMultipleFiles,
     resetUpload,
-    removeFile,
     getOverallProgress,
     isUploadComplete,
   } = useDocumentUpload();

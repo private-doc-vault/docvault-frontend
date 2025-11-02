@@ -13,23 +13,19 @@ const authApi = {
    * @returns {Promise<object>} User data and tokens
    */
   login: async (credentials) => {
-    try {
-      const response = await apiClient.post('/auth/login', credentials);
-      const { user, token, refresh_token } = response.data;
+    const response = await apiClient.post('/auth/login', credentials);
+    const { user, token, refresh_token } = response.data;
 
-      // Store tokens and user data
-      tokenManager.setTokens(token, refresh_token);
-      tokenManager.setUser(user);
+    // Store tokens and user data
+    tokenManager.setTokens(token, refresh_token);
+    tokenManager.setUser(user);
 
-      // Return normalized response for consistency
-      return {
-        user,
-        accessToken: token,
-        refreshToken: refresh_token,
-      };
-    } catch (error) {
-      throw error;
-    }
+    // Return normalized response for consistency
+    return {
+      user,
+      accessToken: token,
+      refreshToken: refresh_token,
+    };
   },
 
   /**
@@ -95,15 +91,11 @@ const authApi = {
    * @returns {Promise<object>} User data and tokens
    */
   register: async (userData) => {
-    try {
-      const response = await apiClient.post('/auth/register', userData);
+    const response = await apiClient.post('/auth/register', userData);
 
-      // Note: Backend register endpoint only returns user data, not tokens
-      // User needs to login after registration
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
+    // Note: Backend register endpoint only returns user data, not tokens
+    // User needs to login after registration
+    return response.data;
   },
 
   /**
@@ -111,17 +103,13 @@ const authApi = {
    * @returns {Promise<object>} User data
    */
   getCurrentUser: async () => {
-    try {
-      const response = await apiClient.get('/auth/me');
-      const { user } = response.data;
+    const response = await apiClient.get('/auth/me');
+    const { user } = response.data;
 
-      // Update stored user data
-      tokenManager.setUser(user);
+    // Update stored user data
+    tokenManager.setUser(user);
 
-      return user;
-    } catch (error) {
-      throw error;
-    }
+    return user;
   },
 
   /**
@@ -130,14 +118,10 @@ const authApi = {
    * @returns {Promise<object>} Success message
    */
   requestPasswordReset: async (email) => {
-    try {
-      const response = await apiClient.post('/auth/password-reset/request', {
-        email,
-      });
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
+    const response = await apiClient.post('/auth/password-reset/request', {
+      email,
+    });
+    return response.data;
   },
 
   /**
@@ -148,12 +132,8 @@ const authApi = {
    * @returns {Promise<object>} Success message
    */
   resetPassword: async (data) => {
-    try {
-      const response = await apiClient.post('/auth/password-reset/reset', data);
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
+    const response = await apiClient.post('/auth/password-reset/reset', data);
+    return response.data;
   },
 
   /**
@@ -164,12 +144,8 @@ const authApi = {
    * @returns {Promise<object>} Success message
    */
   changePassword: async (data) => {
-    try {
-      const response = await apiClient.post('/auth/change-password', data);
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
+    const response = await apiClient.post('/auth/change-password', data);
+    return response.data;
   },
 };
 

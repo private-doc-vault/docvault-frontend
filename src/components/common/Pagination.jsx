@@ -102,7 +102,7 @@ const Pagination = ({
         )}
 
         {/* Page Numbers */}
-        {pageNumbers.map((page, index) => {
+        {pageNumbers.map((page) => {
           if (typeof page === 'string' && page.startsWith('ellipsis')) {
             return <BootstrapPagination.Ellipsis key={page} disabled />;
           }

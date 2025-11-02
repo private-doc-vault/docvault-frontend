@@ -1,9 +1,7 @@
 import { renderHook, act, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-import ocrReducer, {
-  setOcrStatus,
-} from '../features/ocr/ocrSlice';
+import ocrReducer from '../features/ocr/ocrSlice';
 import useOcrPolling from './useOcrPolling';
 import ocrApi from '../api/ocrApi';
 
@@ -19,7 +17,9 @@ const createWrapper = (initialState = {}) => {
     preloadedState: initialState,
   });
 
-  return ({ children }) => <Provider store={store}>{children}</Provider>;
+  const Wrapper = ({ children }) => <Provider store={store}>{children}</Provider>;
+  Wrapper.displayName = 'ReduxWrapper';
+  return Wrapper;
 };
 
 describe('useOcrPolling', () => {
@@ -97,7 +97,7 @@ describe('useOcrPolling', () => {
       },
     });
 
-    const { result } = renderHook(
+    renderHook(
       () => useOcrPolling(1, { enabled: true, onComplete }),
       { wrapper }
     );
@@ -130,7 +130,7 @@ describe('useOcrPolling', () => {
       },
     });
 
-    const { result } = renderHook(
+    renderHook(
       () => useOcrPolling(1, { enabled: true, onError }),
       { wrapper }
     );

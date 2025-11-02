@@ -40,24 +40,6 @@ import ShareModal from '../components/documents/ShareModal';
 import DocumentAuditLog from '../components/audit/DocumentAuditLog';
 
 /**
- * Get badge variant based on OCR status
- */
-const getStatusVariant = (status) => {
-  switch (status?.toLowerCase()) {
-    case 'completed':
-      return 'success';
-    case 'processing':
-      return 'primary';
-    case 'pending':
-      return 'secondary';
-    case 'failed':
-      return 'danger';
-    default:
-      return 'secondary';
-  }
-};
-
-/**
  * Format file size to human readable format
  */
 const formatFileSize = (bytes) => {

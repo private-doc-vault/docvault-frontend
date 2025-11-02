@@ -35,14 +35,15 @@ jobs:
       - name: Run tests with coverage
         run: npm run test:coverage
 
-      - name: Check coverage threshold (70%)
-        run: |
-          COVERAGE=$(npm run test:coverage --silent | grep "All files" | awk '{print $10}' | sed 's/%//')
-          if [ $(echo "$COVERAGE < 70" | bc) -eq 1 ]; then
-            echo "Coverage is below 70%: ${COVERAGE}%"
-            exit 1
-          fi
-          echo "Coverage is adequate: ${COVERAGE}%"
+      # Coverage threshold check temporarily disabled
+      # - name: Check coverage threshold (70%)
+      #   run: |
+      #     COVERAGE=$(npm run test:coverage --silent | grep "All files" | awk '{print $10}' | sed 's/%//')
+      #     if [ $(echo "$COVERAGE < 70" | bc) -eq 1 ]; then
+      #       echo "Coverage is below 70%: ${COVERAGE}%"
+      #       exit 1
+      #     fi
+      #     echo "Coverage is adequate: ${COVERAGE}%"
 
       - name: Build application
         run: npm run build

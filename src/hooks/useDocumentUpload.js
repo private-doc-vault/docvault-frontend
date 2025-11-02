@@ -102,7 +102,9 @@ const useDocumentUpload = () => {
         successful,
         failed,
         results: results.map((r) =>
-          r.status === 'fulfilled' ? r.value : { success: false, error: r.reason }
+          r.status === 'fulfilled'
+            ? r.value
+            : { success: false, error: r.reason }
         ),
       };
     },

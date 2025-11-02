@@ -47,18 +47,10 @@ const EmptyState = ({
         style={{ minHeight: '300px' }}
       >
         {/* Icon */}
-        {icon && (
-          <div className={`mb-3 ${styles.iconColor}`}>
-            {icon}
-          </div>
-        )}
+        {icon && <div className={`mb-3 ${styles.iconColor}`}>{icon}</div>}
 
         {/* Title */}
-        {title && (
-          <h4 className={`mb-2 ${styles.titleColor}`}>
-            {title}
-          </h4>
-        )}
+        {title && <h4 className={`mb-2 ${styles.titleColor}`}>{title}</h4>}
 
         {/* Message */}
         {message && (
@@ -68,11 +60,7 @@ const EmptyState = ({
         )}
 
         {/* Action Button */}
-        {action && (
-          <div>
-            {action}
-          </div>
-        )}
+        {action && <div>{action}</div>}
       </div>
     </Container>
   );

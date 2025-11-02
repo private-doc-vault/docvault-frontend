@@ -36,9 +36,7 @@ const CATEGORIES = [
 
 // Validation schema
 const metadataSchema = yup.object().shape({
-  title: yup
-    .string()
-    .max(255, 'Title must not exceed 255 characters'),
+  title: yup.string().max(255, 'Title must not exceed 255 characters'),
   description: yup
     .string()
     .max(1000, 'Description must not exceed 1000 characters'),
@@ -50,7 +48,12 @@ const metadataSchema = yup.object().shape({
  * DocumentMetadataEditor component
  * Form for editing document metadata
  */
-const DocumentMetadataEditor = ({ document, onCancel, onSuccess, inline = false }) => {
+const DocumentMetadataEditor = ({
+  document,
+  onCancel,
+  onSuccess,
+  inline = false,
+}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [submitting, setSubmitting] = useState(false);
@@ -96,7 +99,10 @@ const DocumentMetadataEditor = ({ document, onCancel, onSuccess, inline = false 
 
       // Parse tags from comma-separated string
       const tags = data.tags
-        ? data.tags.split(',').map((tag) => tag.trim()).filter(Boolean)
+        ? data.tags
+            .split(',')
+            .map((tag) => tag.trim())
+            .filter(Boolean)
         : [];
 
       // Prepare update data
@@ -131,7 +137,9 @@ const DocumentMetadataEditor = ({ document, onCancel, onSuccess, inline = false 
       }
     } catch (err) {
       console.error('Failed to update document:', err);
-      setError(err.response?.data?.message || 'Failed to update document metadata');
+      setError(
+        err.response?.data?.message || 'Failed to update document metadata'
+      );
     } finally {
       setSubmitting(false);
     }
@@ -287,7 +295,10 @@ const DocumentMetadataEditor = ({ document, onCancel, onSuccess, inline = false 
     <Container fluid className="py-4">
       {/* Breadcrumb */}
       <Breadcrumb className="mb-3">
-        <Breadcrumb.Item onClick={() => navigate('/documents')} style={{ cursor: 'pointer' }}>
+        <Breadcrumb.Item
+          onClick={() => navigate('/documents')}
+          style={{ cursor: 'pointer' }}
+        >
           Documents
         </Breadcrumb.Item>
         <Breadcrumb.Item

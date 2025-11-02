@@ -17,7 +17,9 @@ const createWrapper = (initialState = {}) => {
     preloadedState: initialState,
   });
 
-  const Wrapper = ({ children }) => <Provider store={store}>{children}</Provider>;
+  const Wrapper = ({ children }) => (
+    <Provider store={store}>{children}</Provider>
+  );
   Wrapper.displayName = 'ReduxWrapper';
   return Wrapper;
 };
@@ -34,12 +36,9 @@ describe('useOcrPolling', () => {
   });
 
   it('should initialize with correct default values', () => {
-    const { result } = renderHook(
-      () => useOcrPolling(1, { enabled: false }),
-      {
-        wrapper: createWrapper(),
-      }
-    );
+    const { result } = renderHook(() => useOcrPolling(1, { enabled: false }), {
+      wrapper: createWrapper(),
+    });
 
     expect(result.current.isPolling).toBe(false);
     expect(result.current.currentStatus).toBeNull();
@@ -97,10 +96,9 @@ describe('useOcrPolling', () => {
       },
     });
 
-    renderHook(
-      () => useOcrPolling(1, { enabled: true, onComplete }),
-      { wrapper }
-    );
+    renderHook(() => useOcrPolling(1, { enabled: true, onComplete }), {
+      wrapper,
+    });
 
     await waitFor(() => {
       expect(ocrApi.fetchOcrStatus).toHaveBeenCalled();
@@ -130,10 +128,7 @@ describe('useOcrPolling', () => {
       },
     });
 
-    renderHook(
-      () => useOcrPolling(1, { enabled: true, onError }),
-      { wrapper }
-    );
+    renderHook(() => useOcrPolling(1, { enabled: true, onError }), { wrapper });
 
     await waitFor(() => {
       expect(ocrApi.fetchOcrStatus).toHaveBeenCalled();
@@ -169,10 +164,9 @@ describe('useOcrPolling', () => {
       },
     });
 
-    renderHook(
-      () => useOcrPolling(1, { enabled: true, onStatusChange }),
-      { wrapper }
-    );
+    renderHook(() => useOcrPolling(1, { enabled: true, onStatusChange }), {
+      wrapper,
+    });
 
     await waitFor(() => {
       expect(onStatusChange).toHaveBeenCalled();
@@ -180,63 +174,54 @@ describe('useOcrPolling', () => {
   });
 
   it('should not poll when enabled is false', () => {
-    const { result } = renderHook(
-      () => useOcrPolling(1, { enabled: false }),
-      {
-        wrapper: createWrapper({
-          ocr: {
-            ocrData: {
-              1: { status: 'processing', progress: 50 },
-            },
-            pollingDocuments: [],
-            loading: false,
-            error: null,
+    const { result } = renderHook(() => useOcrPolling(1, { enabled: false }), {
+      wrapper: createWrapper({
+        ocr: {
+          ocrData: {
+            1: { status: 'processing', progress: 50 },
           },
-        }),
-      }
-    );
+          pollingDocuments: [],
+          loading: false,
+          error: null,
+        },
+      }),
+    });
 
     expect(result.current.isPolling).toBe(false);
     expect(ocrApi.fetchOcrStatus).not.toHaveBeenCalled();
   });
 
   it('should not poll for completed documents', () => {
-    const { result } = renderHook(
-      () => useOcrPolling(1, { enabled: true }),
-      {
-        wrapper: createWrapper({
-          ocr: {
-            ocrData: {
-              1: { status: 'completed', progress: 100 },
-            },
-            pollingDocuments: [],
-            loading: false,
-            error: null,
+    const { result } = renderHook(() => useOcrPolling(1, { enabled: true }), {
+      wrapper: createWrapper({
+        ocr: {
+          ocrData: {
+            1: { status: 'completed', progress: 100 },
           },
-        }),
-      }
-    );
+          pollingDocuments: [],
+          loading: false,
+          error: null,
+        },
+      }),
+    });
 
     expect(result.current.isPolling).toBe(false);
     expect(ocrApi.fetchOcrStatus).not.toHaveBeenCalled();
   });
 
   it('should not poll for failed documents', () => {
-    const { result } = renderHook(
-      () => useOcrPolling(1, { enabled: true }),
-      {
-        wrapper: createWrapper({
-          ocr: {
-            ocrData: {
-              1: { status: 'failed', error: 'Error' },
-            },
-            pollingDocuments: [],
-            loading: false,
-            error: null,
+    const { result } = renderHook(() => useOcrPolling(1, { enabled: true }), {
+      wrapper: createWrapper({
+        ocr: {
+          ocrData: {
+            1: { status: 'failed', error: 'Error' },
           },
-        }),
-      }
-    );
+          pollingDocuments: [],
+          loading: false,
+          error: null,
+        },
+      }),
+    });
 
     expect(result.current.isPolling).toBe(false);
     expect(ocrApi.fetchOcrStatus).not.toHaveBeenCalled();
@@ -246,9 +231,7 @@ describe('useOcrPolling', () => {
     const onError = jest.fn();
     const consoleError = jest.spyOn(console, 'error').mockImplementation();
 
-    ocrApi.fetchOcrStatus.mockRejectedValue(
-      new Error('API request failed')
-    );
+    ocrApi.fetchOcrStatus.mockRejectedValue(new Error('API request failed'));
 
     const wrapper = createWrapper({
       ocr: {
@@ -261,10 +244,7 @@ describe('useOcrPolling', () => {
       },
     });
 
-    renderHook(
-      () => useOcrPolling(1, { enabled: true, onError }),
-      { wrapper }
-    );
+    renderHook(() => useOcrPolling(1, { enabled: true, onError }), { wrapper });
 
     await waitFor(() => {
       expect(onError).toHaveBeenCalled();
@@ -316,10 +296,9 @@ describe('useOcrPolling', () => {
 
     const wrapper = createWrapper();
 
-    const { result } = renderHook(
-      () => useOcrPolling(1, { enabled: false }),
-      { wrapper }
-    );
+    const { result } = renderHook(() => useOcrPolling(1, { enabled: false }), {
+      wrapper,
+    });
 
     expect(result.current.isPolling).toBe(false);
 
@@ -348,10 +327,9 @@ describe('useOcrPolling', () => {
 
     const wrapper = createWrapper();
 
-    const { result } = renderHook(
-      () => useOcrPolling(1, { enabled: false }),
-      { wrapper }
-    );
+    const { result } = renderHook(() => useOcrPolling(1, { enabled: false }), {
+      wrapper,
+    });
 
     // Manual refetch
     await act(async () => {
@@ -378,10 +356,9 @@ describe('useOcrPolling', () => {
       },
     });
 
-    renderHook(
-      () => useOcrPolling(1, { enabled: true, interval: 5000 }),
-      { wrapper }
-    );
+    renderHook(() => useOcrPolling(1, { enabled: true, interval: 5000 }), {
+      wrapper,
+    });
 
     // Wait for initial fetch
     await waitFor(() => {

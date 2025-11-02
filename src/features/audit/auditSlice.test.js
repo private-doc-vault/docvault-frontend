@@ -35,7 +35,9 @@ describe('auditSlice', () => {
 
   describe('reducers', () => {
     it('should return the initial state', () => {
-      expect(auditReducer(undefined, { type: 'unknown' })).toEqual(initialState);
+      expect(auditReducer(undefined, { type: 'unknown' })).toEqual(
+        initialState
+      );
     });
 
     it('should handle setLogs', () => {

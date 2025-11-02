@@ -67,7 +67,9 @@ const ShareModal = ({ show, onHide, document }) => {
         dispatch(setShares(data.shares || data || []));
       } catch (err) {
         console.error('Failed to fetch shares:', err);
-        dispatch(setError(err.response?.data?.message || 'Failed to load shares'));
+        dispatch(
+          setError(err.response?.data?.message || 'Failed to load shares')
+        );
       } finally {
         dispatch(setLoading(false));
       }
@@ -140,7 +142,9 @@ const ShareModal = ({ show, onHide, document }) => {
       setSelectedPermissions(['read']);
     } catch (err) {
       console.error('Failed to add share:', err);
-      dispatch(setError(err.response?.data?.message || 'Failed to share document'));
+      dispatch(
+        setError(err.response?.data?.message || 'Failed to share document')
+      );
     } finally {
       setAdding(false);
     }
@@ -159,7 +163,9 @@ const ShareModal = ({ show, onHide, document }) => {
       dispatch(updateShare(updatedShare));
     } catch (err) {
       console.error('Failed to update share permissions:', err);
-      dispatch(setError(err.response?.data?.message || 'Failed to update permissions'));
+      dispatch(
+        setError(err.response?.data?.message || 'Failed to update permissions')
+      );
       throw err;
     }
   };
@@ -175,7 +181,9 @@ const ShareModal = ({ show, onHide, document }) => {
       dispatch(removeShare(shareId));
     } catch (err) {
       console.error('Failed to revoke share:', err);
-      dispatch(setError(err.response?.data?.message || 'Failed to revoke access'));
+      dispatch(
+        setError(err.response?.data?.message || 'Failed to revoke access')
+      );
       throw err;
     }
   };
@@ -202,13 +210,19 @@ const ShareModal = ({ show, onHide, document }) => {
   return (
     <Modal show={show} onHide={handleClose} size="lg">
       <Modal.Header closeButton>
-        <Modal.Title>Share &quot;{document.title || document.filename}&quot;</Modal.Title>
+        <Modal.Title>
+          Share &quot;{document.title || document.filename}&quot;
+        </Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
         {/* Error Alert */}
         {error && (
-          <Alert variant="danger" dismissible onClose={() => dispatch(clearError())}>
+          <Alert
+            variant="danger"
+            dismissible
+            onClose={() => dispatch(clearError())}
+          >
             {error}
           </Alert>
         )}
@@ -261,11 +275,13 @@ const ShareModal = ({ show, onHide, document }) => {
                   </ListGroup>
                 )}
 
-                {searchQuery.length >= 2 && !searching && searchResults.length === 0 && (
-                  <Alert variant="info" className="mb-0">
-                    No users found matching &quot;{searchQuery}&quot;
-                  </Alert>
-                )}
+                {searchQuery.length >= 2 &&
+                  !searching &&
+                  searchResults.length === 0 && (
+                    <Alert variant="info" className="mb-0">
+                      No users found matching &quot;{searchQuery}&quot;
+                    </Alert>
+                  )}
               </>
             ) : (
               <>

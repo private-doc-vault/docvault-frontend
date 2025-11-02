@@ -30,9 +30,7 @@ const formatStatusName = (status) => {
  */
 const UserStatusBadge = ({ status }) => {
   return (
-    <Badge bg={getStatusVariant(status)}>
-      {formatStatusName(status)}
-    </Badge>
+    <Badge bg={getStatusVariant(status)}>{formatStatusName(status)}</Badge>
   );
 };
 

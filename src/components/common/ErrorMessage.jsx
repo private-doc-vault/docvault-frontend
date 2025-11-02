@@ -82,10 +82,12 @@ const ErrorMessage = ({
       onClose={onClose}
       className={className}
     >
-      {title && <Alert.Heading className="h6">
-        {showIcon && getIcon()}
-        {title}
-      </Alert.Heading>}
+      {title && (
+        <Alert.Heading className="h6">
+          {showIcon && getIcon()}
+          {title}
+        </Alert.Heading>
+      )}
       <div className={title ? 'mt-2' : ''}>
         {!title && showIcon && getIcon()}
         {errorMessage}

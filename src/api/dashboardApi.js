@@ -49,7 +49,9 @@ export const fetchQueueStatus = async () => {
  */
 export const retryStuckTask = async (documentId) => {
   try {
-    const response = await apiClient.post(`/api/documents/${documentId}/retry-processing`);
+    const response = await apiClient.post(
+      `/api/documents/${documentId}/retry-processing`
+    );
     return response.data;
   } catch (error) {
     console.error(`Error retrying task for document ${documentId}:`, error);
@@ -64,7 +66,9 @@ export const retryStuckTask = async (documentId) => {
  */
 export const cancelTask = async (documentId) => {
   try {
-    const response = await apiClient.post(`/api/documents/${documentId}/cancel-processing`);
+    const response = await apiClient.post(
+      `/api/documents/${documentId}/cancel-processing`
+    );
     return response.data;
   } catch (error) {
     console.error(`Error canceling task for document ${documentId}:`, error);
@@ -94,7 +98,9 @@ export const fetchActivityData = async (days = 7) => {
  */
 export const fetchUserActivityData = async (days = 7) => {
   try {
-    const response = await apiClient.get(`/api/admin/user-activity?days=${days}`);
+    const response = await apiClient.get(
+      `/api/admin/user-activity?days=${days}`
+    );
     return response.data;
   } catch (error) {
     console.error('Error fetching user activity data:', error);
@@ -109,7 +115,9 @@ export const fetchUserActivityData = async (days = 7) => {
  */
 export const fetchStorageUsageTrend = async (days = 30) => {
   try {
-    const response = await apiClient.get(`/api/admin/storage-usage?days=${days}`);
+    const response = await apiClient.get(
+      `/api/admin/storage-usage?days=${days}`
+    );
     return response.data;
   } catch (error) {
     console.error('Error fetching storage usage trend:', error);
@@ -124,7 +132,9 @@ export const fetchStorageUsageTrend = async (days = 30) => {
  */
 export const fetchRecentErrors = async (limit = 10) => {
   try {
-    const response = await apiClient.get(`/api/admin/recent-errors?limit=${limit}`);
+    const response = await apiClient.get(
+      `/api/admin/recent-errors?limit=${limit}`
+    );
     return response.data;
   } catch (error) {
     console.error('Error fetching recent errors:', error);

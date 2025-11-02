@@ -54,7 +54,10 @@ const documentsSlice = createSlice({
     deleteDocument: (state, action) => {
       const documentId = action.payload;
       state.documents = state.documents.filter((doc) => doc.id !== documentId);
-      state.pagination.totalItems = Math.max(0, state.pagination.totalItems - 1);
+      state.pagination.totalItems = Math.max(
+        0,
+        state.pagination.totalItems - 1
+      );
       // Clear selectedDocument if it was deleted
       if (state.selectedDocument?.id === documentId) {
         state.selectedDocument = null;
@@ -114,7 +117,8 @@ export const {
 
 // Selectors
 export const selectDocuments = (state) => state.documents.documents;
-export const selectSelectedDocument = (state) => state.documents.selectedDocument;
+export const selectSelectedDocument = (state) =>
+  state.documents.selectedDocument;
 export const selectDocumentById = (documentId) => (state) =>
   state.documents.documents.find((doc) => doc.id === documentId);
 export const selectFilters = (state) => state.documents.filters;

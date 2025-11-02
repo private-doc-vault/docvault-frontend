@@ -110,7 +110,8 @@ const SavedSearchList = () => {
             )}
             {search.filters && Object.keys(search.filters).length > 0 && (
               <Badge bg="secondary" className="mt-1">
-                {Object.keys(search.filters).length} filter{Object.keys(search.filters).length !== 1 ? 's' : ''}
+                {Object.keys(search.filters).length} filter
+                {Object.keys(search.filters).length !== 1 ? 's' : ''}
               </Badge>
             )}
           </div>

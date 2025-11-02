@@ -41,14 +41,16 @@ const OcrProgressBar = ({
   };
 
   // Determine if progress bar should be animated
-  const isAnimated = animated && (status === 'processing' || status === 'pending');
+  const isAnimated =
+    animated && (status === 'processing' || status === 'pending');
 
   // Size classes for different variants
-  const sizeClass = {
-    small: 'progress-sm',
-    default: '',
-    large: 'progress-lg',
-  }[size] || '';
+  const sizeClass =
+    {
+      small: 'progress-sm',
+      default: '',
+      large: 'progress-lg',
+    }[size] || '';
 
   return (
     <div className={`ocr-progress-container ${className}`}>
@@ -67,14 +69,10 @@ const OcrProgressBar = ({
         </small>
       )}
       {status === 'failed' && (
-        <small className="text-danger d-block mt-1">
-          Processing failed
-        </small>
+        <small className="text-danger d-block mt-1">Processing failed</small>
       )}
       {status === 'completed' && (
-        <small className="text-success d-block mt-1">
-          Processing complete
-        </small>
+        <small className="text-success d-block mt-1">Processing complete</small>
       )}
     </div>
   );

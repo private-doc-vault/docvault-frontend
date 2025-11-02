@@ -1,13 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {
-  Table,
-  Badge,
-  Button,
-  ButtonGroup,
-  Dropdown,
-} from 'react-bootstrap';
+import { Table, Badge, Button, ButtonGroup, Dropdown } from 'react-bootstrap';
 import {
   ArrowUp,
   ArrowDown,
@@ -45,7 +39,8 @@ const formatFileSize = (bytes) => {
   if (!bytes) return 'N/A';
   if (bytes < 1024) return bytes + ' B';
   if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-  if (bytes < 1024 * 1024 * 1024) return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  if (bytes < 1024 * 1024 * 1024)
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
   return (bytes / (1024 * 1024 * 1024)).toFixed(1) + ' GB';
 };
 
@@ -144,7 +139,9 @@ const DocumentTable = ({ documents, onUpdate, onDelete }) => {
    * Handle document deletion
    */
   const handleDelete = async (document) => {
-    if (!window.confirm(`Are you sure you want to delete "${document.filename}"?`)) {
+    if (
+      !window.confirm(`Are you sure you want to delete "${document.filename}"?`)
+    ) {
       return;
     }
 
@@ -229,11 +226,17 @@ const DocumentTable = ({ documents, onUpdate, onDelete }) => {
               {/* Filename */}
               <td>
                 <div className="d-flex flex-column">
-                  <span className="fw-medium text-truncate" style={{ maxWidth: '300px' }}>
+                  <span
+                    className="fw-medium text-truncate"
+                    style={{ maxWidth: '300px' }}
+                  >
                     {document.title || document.filename}
                   </span>
                   {document.title && (
-                    <small className="text-muted text-truncate" style={{ maxWidth: '300px' }}>
+                    <small
+                      className="text-muted text-truncate"
+                      style={{ maxWidth: '300px' }}
+                    >
                       {document.filename}
                     </small>
                   )}
@@ -241,7 +244,11 @@ const DocumentTable = ({ documents, onUpdate, onDelete }) => {
                   {document.tags && document.tags.length > 0 && (
                     <div className="d-md-none mt-1">
                       {document.tags.slice(0, 2).map((tag, index) => (
-                        <Badge key={index} bg="secondary" className="me-1 small">
+                        <Badge
+                          key={index}
+                          bg="secondary"
+                          className="me-1 small"
+                        >
                           {tag}
                         </Badge>
                       ))}

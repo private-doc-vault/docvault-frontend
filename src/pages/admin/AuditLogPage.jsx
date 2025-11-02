@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Card, Button, Spinner, Alert } from 'react-bootstrap';
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Button,
+  Spinner,
+  Alert,
+} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectLogs,
@@ -49,11 +57,15 @@ const AuditLogPage = () => {
       dispatch(setPagination(result.pagination));
     } catch (err) {
       console.error('Error fetching audit logs:', err);
-      dispatch(setError(err.response?.data?.message || 'Failed to fetch audit logs'));
-      dispatch(showToast({
-        message: 'Failed to load audit logs',
-        variant: 'danger',
-      }));
+      dispatch(
+        setError(err.response?.data?.message || 'Failed to fetch audit logs')
+      );
+      dispatch(
+        showToast({
+          message: 'Failed to load audit logs',
+          variant: 'danger',
+        })
+      );
     } finally {
       dispatch(setLoading(false));
     }
@@ -83,16 +95,20 @@ const AuditLogPage = () => {
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
 
-      dispatch(showToast({
-        message: 'Audit logs exported successfully',
-        variant: 'success',
-      }));
+      dispatch(
+        showToast({
+          message: 'Audit logs exported successfully',
+          variant: 'success',
+        })
+      );
     } catch (err) {
       console.error('Error exporting audit logs:', err);
-      dispatch(showToast({
-        message: 'Failed to export audit logs',
-        variant: 'danger',
-      }));
+      dispatch(
+        showToast({
+          message: 'Failed to export audit logs',
+          variant: 'danger',
+        })
+      );
     } finally {
       setExporting(false);
     }
@@ -140,7 +156,11 @@ const AuditLogPage = () => {
       {error && (
         <Row className="mb-3">
           <Col>
-            <Alert variant="danger" onClose={() => dispatch(setError(null))} dismissible>
+            <Alert
+              variant="danger"
+              onClose={() => dispatch(setError(null))}
+              dismissible
+            >
               {error}
             </Alert>
           </Col>
@@ -154,13 +174,15 @@ const AuditLogPage = () => {
               <AuditLogFilters
                 filters={filters}
                 onFilterChange={handleFilterChange}
-                onReset={() => handleFilterChange({
-                  documentId: null,
-                  userId: null,
-                  action: null,
-                  startDate: null,
-                  endDate: null,
-                })}
+                onReset={() =>
+                  handleFilterChange({
+                    documentId: null,
+                    userId: null,
+                    action: null,
+                    startDate: null,
+                    endDate: null,
+                  })
+                }
               />
             </Card.Body>
           </Card>
@@ -180,7 +202,10 @@ const AuditLogPage = () => {
                 </div>
               ) : logs.length === 0 ? (
                 <div className="text-center py-5">
-                  <i className="bi bi-file-text" style={{ fontSize: '3rem', color: '#dee2e6' }}></i>
+                  <i
+                    className="bi bi-file-text"
+                    style={{ fontSize: '3rem', color: '#dee2e6' }}
+                  ></i>
                   <h5 className="mt-3 text-muted">No audit logs found</h5>
                   <p className="text-muted">
                     Try adjusting your filters or check back later

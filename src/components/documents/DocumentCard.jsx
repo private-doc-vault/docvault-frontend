@@ -1,12 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {
-  Card,
-  Badge,
-  Dropdown,
-  Spinner,
-} from 'react-bootstrap';
+import { Card, Badge, Dropdown, Spinner } from 'react-bootstrap';
 import {
   ThreeDotsVertical,
   FileEarmark,
@@ -27,7 +22,8 @@ const formatFileSize = (bytes) => {
   if (!bytes) return 'N/A';
   if (bytes < 1024) return bytes + ' B';
   if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-  if (bytes < 1024 * 1024 * 1024) return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  if (bytes < 1024 * 1024 * 1024)
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
   return (bytes / (1024 * 1024 * 1024)).toFixed(1) + ' GB';
 };
 
@@ -90,7 +86,9 @@ const DocumentCard = ({ document, onUpdate, onDelete }) => {
   const handleDelete = async (e) => {
     e.stopPropagation();
 
-    if (!window.confirm(`Are you sure you want to delete "${document.filename}"?`)) {
+    if (
+      !window.confirm(`Are you sure you want to delete "${document.filename}"?`)
+    ) {
       return;
     }
 
@@ -215,7 +213,8 @@ const DocumentCard = ({ document, onUpdate, onDelete }) => {
         </div>
 
         {/* OCR Progress Bar */}
-        {(document.ocrStatus === 'processing' || document.ocrStatus === 'pending') && (
+        {(document.ocrStatus === 'processing' ||
+          document.ocrStatus === 'pending') && (
           <div className="mb-2">
             <OcrProgressBar
               progress={document.ocrProgress || 0}
@@ -229,7 +228,11 @@ const DocumentCard = ({ document, onUpdate, onDelete }) => {
         {/* Category */}
         {document.category && (
           <div className="mt-auto">
-            <Badge bg="info" className="text-truncate" style={{ maxWidth: '100%' }}>
+            <Badge
+              bg="info"
+              className="text-truncate"
+              style={{ maxWidth: '100%' }}
+            >
               {document.category}
             </Badge>
           </div>

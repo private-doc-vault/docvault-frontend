@@ -56,19 +56,30 @@ const RoleManagementPage = () => {
       dispatch(clearError());
 
       // Fetch roles, permissions, and role-permission mappings in parallel
-      const [rolesData, permissionsData, rolePermissionsData] = await Promise.all([
-        rolesApi.fetchRoles(),
-        rolesApi.fetchPermissions(),
-        rolesApi.fetchRolePermissions(),
-      ]);
+      const [rolesData, permissionsData, rolePermissionsData] =
+        await Promise.all([
+          rolesApi.fetchRoles(),
+          rolesApi.fetchPermissions(),
+          rolesApi.fetchRolePermissions(),
+        ]);
 
       // Update Redux state
       dispatch(setRoles(rolesData.roles || rolesData || []));
-      dispatch(setPermissions(permissionsData.permissions || permissionsData || []));
-      dispatch(setRolePermissions(rolePermissionsData.rolePermissions || rolePermissionsData || {}));
+      dispatch(
+        setPermissions(permissionsData.permissions || permissionsData || [])
+      );
+      dispatch(
+        setRolePermissions(
+          rolePermissionsData.rolePermissions || rolePermissionsData || {}
+        )
+      );
     } catch (err) {
       console.error('Failed to fetch roles and permissions:', err);
-      dispatch(setError(err.response?.data?.message || 'Failed to load roles and permissions'));
+      dispatch(
+        setError(
+          err.response?.data?.message || 'Failed to load roles and permissions'
+        )
+      );
     } finally {
       dispatch(setLoading(false));
     }
@@ -101,7 +112,9 @@ const RoleManagementPage = () => {
       }, 3000);
     } catch (err) {
       console.error('Failed to save role permissions:', err);
-      dispatch(setError(err.response?.data?.message || 'Failed to save changes'));
+      dispatch(
+        setError(err.response?.data?.message || 'Failed to save changes')
+      );
     } finally {
       setSaving(false);
     }
@@ -111,7 +124,9 @@ const RoleManagementPage = () => {
    * Handle discard changes
    */
   const handleDiscard = () => {
-    if (window.confirm('Are you sure you want to discard all unsaved changes?')) {
+    if (
+      window.confirm('Are you sure you want to discard all unsaved changes?')
+    ) {
       dispatch(discardChanges());
       // Refetch data to restore original state
       fetchData();
@@ -174,21 +189,30 @@ const RoleManagementPage = () => {
       {/* Unsaved Changes Warning */}
       {hasUnsavedChanges && (
         <Alert variant="warning" className="mb-4">
-          <strong>Unsaved Changes:</strong> You have unsaved changes to role permissions.
-          Click &quot;Save Changes&quot; to persist your modifications.
+          <strong>Unsaved Changes:</strong> You have unsaved changes to role
+          permissions. Click &quot;Save Changes&quot; to persist your
+          modifications.
         </Alert>
       )}
 
       {/* Success Alert */}
       {saveSuccess && (
-        <Alert variant="success" dismissible onClose={() => setSaveSuccess(false)}>
+        <Alert
+          variant="success"
+          dismissible
+          onClose={() => setSaveSuccess(false)}
+        >
           Changes saved successfully!
         </Alert>
       )}
 
       {/* Error Alert */}
       {error && (
-        <Alert variant="danger" dismissible onClose={() => dispatch(clearError())}>
+        <Alert
+          variant="danger"
+          dismissible
+          onClose={() => dispatch(clearError())}
+        >
           {error}
         </Alert>
       )}
@@ -226,7 +250,8 @@ const RoleManagementPage = () => {
           <p>
             {roles.length === 0 && 'No roles found. '}
             {permissions.length === 0 && 'No permissions found. '}
-            Please ensure the system has been properly configured with roles and permissions.
+            Please ensure the system has been properly configured with roles and
+            permissions.
           </p>
         </Alert>
       )}
@@ -245,7 +270,10 @@ const RoleManagementPage = () => {
                     <li key={role.id || role.name}>
                       <strong>{role.name}</strong>
                       {role.description && (
-                        <span className="text-muted"> - {role.description}</span>
+                        <span className="text-muted">
+                          {' '}
+                          - {role.description}
+                        </span>
                       )}
                     </li>
                   ))}
@@ -264,7 +292,10 @@ const RoleManagementPage = () => {
                     <li key={perm.id || perm.name}>
                       <strong>{perm.name}</strong>
                       {perm.description && (
-                        <span className="text-muted"> - {perm.description}</span>
+                        <span className="text-muted">
+                          {' '}
+                          - {perm.description}
+                        </span>
                       )}
                     </li>
                   ))}

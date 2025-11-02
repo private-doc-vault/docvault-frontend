@@ -77,7 +77,9 @@ describe('searchSlice', () => {
 
   describe('reducers', () => {
     it('should return the initial state', () => {
-      expect(searchReducer(undefined, { type: 'unknown' })).toEqual(initialState);
+      expect(searchReducer(undefined, { type: 'unknown' })).toEqual(
+        initialState
+      );
     });
 
     describe('setQuery', () => {
@@ -87,7 +89,10 @@ describe('searchSlice', () => {
       });
 
       it('should reset to page 1 when query changes', () => {
-        const state = { ...initialState, pagination: { ...initialState.pagination, currentPage: 3 } };
+        const state = {
+          ...initialState,
+          pagination: { ...initialState.pagination, currentPage: 3 },
+        };
         const actual = searchReducer(state, setQuery('new query'));
         expect(actual.pagination.currentPage).toBe(1);
       });
@@ -95,7 +100,10 @@ describe('searchSlice', () => {
 
     describe('setResults', () => {
       it('should set search results', () => {
-        const actual = searchReducer(initialState, setResults(mockSearchResults));
+        const actual = searchReducer(
+          initialState,
+          setResults(mockSearchResults)
+        );
         expect(actual.results).toEqual(mockSearchResults);
         expect(actual.loading).toBe(false);
         expect(actual.error).toBe(null);
@@ -122,14 +130,23 @@ describe('searchSlice', () => {
           ...initialState,
           filters: { ...initialState.filters, category: 'Invoice' },
         };
-        const actual = searchReducer(state, setFilters({ dateFrom: '2024-01-01' }));
+        const actual = searchReducer(
+          state,
+          setFilters({ dateFrom: '2024-01-01' })
+        );
         expect(actual.filters.category).toBe('Invoice');
         expect(actual.filters.dateFrom).toBe('2024-01-01');
       });
 
       it('should reset to page 1 when filters change', () => {
-        const state = { ...initialState, pagination: { ...initialState.pagination, currentPage: 3 } };
-        const actual = searchReducer(state, setFilters({ category: 'Invoice' }));
+        const state = {
+          ...initialState,
+          pagination: { ...initialState.pagination, currentPage: 3 },
+        };
+        const actual = searchReducer(
+          state,
+          setFilters({ category: 'Invoice' })
+        );
         expect(actual.pagination.currentPage).toBe(1);
       });
     });
@@ -162,13 +179,18 @@ describe('searchSlice', () => {
     describe('setSavedSearches', () => {
       it('should set saved searches', () => {
         const savedSearches = [mockSavedSearch];
-        const actual = searchReducer(initialState, setSavedSearches(savedSearches));
+        const actual = searchReducer(
+          initialState,
+          setSavedSearches(savedSearches)
+        );
         expect(actual.savedSearches).toEqual(savedSearches);
       });
 
       it('should replace existing saved searches', () => {
         const state = { ...initialState, savedSearches: [mockSavedSearch] };
-        const newSavedSearches = [{ ...mockSavedSearch, id: 2, name: 'New Search' }];
+        const newSavedSearches = [
+          { ...mockSavedSearch, id: 2, name: 'New Search' },
+        ];
         const actual = searchReducer(state, setSavedSearches(newSavedSearches));
         expect(actual.savedSearches).toEqual(newSavedSearches);
       });
@@ -176,7 +198,10 @@ describe('searchSlice', () => {
 
     describe('addSavedSearch', () => {
       it('should add a saved search to the beginning of the list', () => {
-        const actual = searchReducer(initialState, addSavedSearch(mockSavedSearch));
+        const actual = searchReducer(
+          initialState,
+          addSavedSearch(mockSavedSearch)
+        );
         expect(actual.savedSearches).toHaveLength(1);
         expect(actual.savedSearches[0]).toEqual(mockSavedSearch);
       });
@@ -201,8 +226,15 @@ describe('searchSlice', () => {
       });
 
       it('should not modify other saved searches', () => {
-        const secondSearch = { ...mockSavedSearch, id: 2, name: 'Second Search' };
-        const state = { ...initialState, savedSearches: [mockSavedSearch, secondSearch] };
+        const secondSearch = {
+          ...mockSavedSearch,
+          id: 2,
+          name: 'Second Search',
+        };
+        const state = {
+          ...initialState,
+          savedSearches: [mockSavedSearch, secondSearch],
+        };
         const updates = { id: 1, name: 'Updated Search' };
         const actual = searchReducer(state, updateSavedSearch(updates));
         expect(actual.savedSearches[0].name).toBe('Updated Search');
@@ -225,8 +257,15 @@ describe('searchSlice', () => {
       });
 
       it('should only delete the specified saved search', () => {
-        const secondSearch = { ...mockSavedSearch, id: 2, name: 'Second Search' };
-        const state = { ...initialState, savedSearches: [mockSavedSearch, secondSearch] };
+        const secondSearch = {
+          ...mockSavedSearch,
+          id: 2,
+          name: 'Second Search',
+        };
+        const state = {
+          ...initialState,
+          savedSearches: [mockSavedSearch, secondSearch],
+        };
         const actual = searchReducer(state, deleteSavedSearch(1));
         expect(actual.savedSearches).toHaveLength(1);
         expect(actual.savedSearches[0]).toEqual(secondSearch);
@@ -269,7 +308,11 @@ describe('searchSlice', () => {
       it('should not affect other pagination properties', () => {
         const state = {
           ...initialState,
-          pagination: { ...initialState.pagination, totalItems: 100, totalPages: 5 },
+          pagination: {
+            ...initialState.pagination,
+            totalItems: 100,
+            totalPages: 5,
+          },
         };
         const actual = searchReducer(state, setCurrentPage(2));
         expect(actual.pagination.currentPage).toBe(2);
@@ -321,7 +364,11 @@ describe('searchSlice', () => {
           query: 'test',
           results: mockSearchResults,
           filters: { category: 'Invoice', dateFrom: '2024-01-01' },
-          pagination: { ...initialState.pagination, currentPage: 3, totalItems: 50 },
+          pagination: {
+            ...initialState.pagination,
+            currentPage: 3,
+            totalItems: 50,
+          },
           error: 'Some error',
         };
         const actual = searchReducer(state, clearSearch());
@@ -352,8 +399,16 @@ describe('searchSlice', () => {
         query: 'test query',
         results: mockSearchResults,
         filters: { category: 'Invoice', dateFrom: '2024-01-01' },
-        savedSearches: [mockSavedSearch, { ...mockSavedSearch, id: 2, name: 'Second Search' }],
-        pagination: { currentPage: 2, pageSize: 20, totalItems: 50, totalPages: 3 },
+        savedSearches: [
+          mockSavedSearch,
+          { ...mockSavedSearch, id: 2, name: 'Second Search' },
+        ],
+        pagination: {
+          currentPage: 2,
+          pageSize: 20,
+          totalItems: 50,
+          totalPages: 3,
+        },
         loading: true,
         error: 'Search error',
       },
@@ -368,7 +423,10 @@ describe('searchSlice', () => {
     });
 
     it('should select filters', () => {
-      expect(selectFilters(mockState)).toEqual({ category: 'Invoice', dateFrom: '2024-01-01' });
+      expect(selectFilters(mockState)).toEqual({
+        category: 'Invoice',
+        dateFrom: '2024-01-01',
+      });
     });
 
     it('should select saved searches', () => {

@@ -1,6 +1,10 @@
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFilters, setFilters, clearFilters } from '../../features/search/searchSlice';
+import {
+  selectFilters,
+  setFilters,
+  clearFilters,
+} from '../../features/search/searchSlice';
 
 /**
  * SearchFilters - Search filter component
@@ -18,7 +22,7 @@ const SearchFilters = () => {
     dispatch(clearFilters());
   };
 
-  const hasActiveFilters = Object.values(filters).some(v => v);
+  const hasActiveFilters = Object.values(filters).some((v) => v);
 
   return (
     <Form>
@@ -29,7 +33,9 @@ const SearchFilters = () => {
             <Form.Select
               size="sm"
               value={filters.category || ''}
-              onChange={(e) => handleFilterChange('category', e.target.value || null)}
+              onChange={(e) =>
+                handleFilterChange('category', e.target.value || null)
+              }
             >
               <option value="">All Categories</option>
               <option value="invoice">Invoice</option>
@@ -46,7 +52,9 @@ const SearchFilters = () => {
             <Form.Select
               size="sm"
               value={filters.documentType || ''}
-              onChange={(e) => handleFilterChange('documentType', e.target.value || null)}
+              onChange={(e) =>
+                handleFilterChange('documentType', e.target.value || null)
+              }
             >
               <option value="">All Types</option>
               <option value="pdf">PDF</option>
@@ -63,7 +71,9 @@ const SearchFilters = () => {
               type="date"
               size="sm"
               value={filters.dateFrom || ''}
-              onChange={(e) => handleFilterChange('dateFrom', e.target.value || null)}
+              onChange={(e) =>
+                handleFilterChange('dateFrom', e.target.value || null)
+              }
             />
           </Form.Group>
         </Col>
@@ -75,7 +85,9 @@ const SearchFilters = () => {
               type="date"
               size="sm"
               value={filters.dateTo || ''}
-              onChange={(e) => handleFilterChange('dateTo', e.target.value || null)}
+              onChange={(e) =>
+                handleFilterChange('dateTo', e.target.value || null)
+              }
             />
           </Form.Group>
         </Col>

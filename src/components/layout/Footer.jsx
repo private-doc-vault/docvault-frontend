@@ -21,9 +21,7 @@ const Footer = () => {
             </small>
           </Col>
           <Col md={6} className="text-center text-md-end">
-            <small className="text-muted">
-              Version {version}
-            </small>
+            <small className="text-muted">Version {version}</small>
           </Col>
         </Row>
       </Container>

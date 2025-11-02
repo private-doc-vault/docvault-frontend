@@ -88,9 +88,15 @@ describe('UserManagementPage Integration Tests', () => {
       renderUserManagementPage();
 
       expect(screen.getByText('User Management')).toBeInTheDocument();
-      expect(screen.getByText('Manage system users and their roles')).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /create user/i })).toBeInTheDocument();
-      expect(screen.getByPlaceholderText(/search by username or email/i)).toBeInTheDocument();
+      expect(
+        screen.getByText('Manage system users and their roles')
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /create user/i })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByPlaceholderText(/search by username or email/i)
+      ).toBeInTheDocument();
 
       // Wait for users to load
       await waitFor(() => {
@@ -100,7 +106,9 @@ describe('UserManagementPage Integration Tests', () => {
     });
 
     it('should show loading state while fetching users', async () => {
-      usersApi.fetchUsers.mockImplementation(() => new Promise(resolve => setTimeout(resolve, 100)));
+      usersApi.fetchUsers.mockImplementation(
+        () => new Promise((resolve) => setTimeout(resolve, 100))
+      );
 
       renderUserManagementPage();
 
@@ -109,13 +117,19 @@ describe('UserManagementPage Integration Tests', () => {
     });
 
     it('should show empty state when no users exist', async () => {
-      usersApi.fetchUsers.mockResolvedValue({ users: [], total: 0, totalPages: 0 });
+      usersApi.fetchUsers.mockResolvedValue({
+        users: [],
+        total: 0,
+        totalPages: 0,
+      });
 
       renderUserManagementPage();
 
       await waitFor(() => {
         expect(screen.getByText('No users found')).toBeInTheDocument();
-        expect(screen.getByText('Get started by creating your first user')).toBeInTheDocument();
+        expect(
+          screen.getByText('Get started by creating your first user')
+        ).toBeInTheDocument();
       });
     });
   });
@@ -193,8 +207,13 @@ describe('UserManagementPage Integration Tests', () => {
       };
 
       usersApi.createUser.mockResolvedValue(newUser);
-      usersApi.fetchUsers.mockResolvedValueOnce(mockApiResponse)
-        .mockResolvedValueOnce({ ...mockApiResponse, users: [...mockUsers, newUser], total: 3 });
+      usersApi.fetchUsers
+        .mockResolvedValueOnce(mockApiResponse)
+        .mockResolvedValueOnce({
+          ...mockApiResponse,
+          users: [...mockUsers, newUser],
+          total: 3,
+        });
 
       renderUserManagementPage();
 
@@ -203,7 +222,9 @@ describe('UserManagementPage Integration Tests', () => {
       });
 
       // Open create modal
-      const createButtons = screen.getAllByRole('button', { name: /create user/i });
+      const createButtons = screen.getAllByRole('button', {
+        name: /create user/i,
+      });
       await user.click(createButtons[0]); // Click the header button
 
       await waitFor(() => {
@@ -220,7 +241,9 @@ describe('UserManagementPage Integration Tests', () => {
       await user.type(passwordInput, 'Password123');
 
       // Submit form - now there are 2 "Create User" buttons (header + modal submit)
-      const submitButtons = screen.getAllByRole('button', { name: /create user/i });
+      const submitButtons = screen.getAllByRole('button', {
+        name: /create user/i,
+      });
       await user.click(submitButtons[submitButtons.length - 1]); // Click the submit button in modal
 
       await waitFor(() => {
@@ -248,7 +271,9 @@ describe('UserManagementPage Integration Tests', () => {
       });
 
       // Open create modal
-      const createButtons = screen.getAllByRole('button', { name: /create user/i });
+      const createButtons = screen.getAllByRole('button', {
+        name: /create user/i,
+      });
       await user.click(createButtons[0]);
 
       await waitFor(() => {
@@ -256,7 +281,9 @@ describe('UserManagementPage Integration Tests', () => {
       });
 
       // Try to submit empty form
-      const submitButtons = screen.getAllByRole('button', { name: /create user/i });
+      const submitButtons = screen.getAllByRole('button', {
+        name: /create user/i,
+      });
       await user.click(submitButtons[submitButtons.length - 1]);
 
       // Should show validation errors
@@ -280,8 +307,9 @@ describe('UserManagementPage Integration Tests', () => {
       // Find and click edit button for testuser
       // Get all edit buttons and click the first one
       const allButtons = screen.getAllByRole('button');
-      const editButtons = allButtons.filter(btn =>
-        btn.hasAttribute('title') && btn.getAttribute('title') === 'Edit User'
+      const editButtons = allButtons.filter(
+        (btn) =>
+          btn.hasAttribute('title') && btn.getAttribute('title') === 'Edit User'
       );
       await user.click(editButtons[0]);
 
@@ -304,8 +332,12 @@ describe('UserManagementPage Integration Tests', () => {
       };
 
       usersApi.updateUser.mockResolvedValue(updatedUser);
-      usersApi.fetchUsers.mockResolvedValueOnce(mockApiResponse)
-        .mockResolvedValueOnce({ ...mockApiResponse, users: [updatedUser, mockUsers[1]] });
+      usersApi.fetchUsers
+        .mockResolvedValueOnce(mockApiResponse)
+        .mockResolvedValueOnce({
+          ...mockApiResponse,
+          users: [updatedUser, mockUsers[1]],
+        });
 
       renderUserManagementPage();
 
@@ -315,8 +347,9 @@ describe('UserManagementPage Integration Tests', () => {
 
       // Open edit modal - click first edit button
       const allButtons = screen.getAllByRole('button');
-      const editButtons = allButtons.filter(btn =>
-        btn.hasAttribute('title') && btn.getAttribute('title') === 'Edit User'
+      const editButtons = allButtons.filter(
+        (btn) =>
+          btn.hasAttribute('title') && btn.getAttribute('title') === 'Edit User'
       );
       await user.click(editButtons[0]);
 
@@ -360,8 +393,13 @@ describe('UserManagementPage Integration Tests', () => {
       window.confirm = jest.fn(() => true);
 
       usersApi.deleteUser.mockResolvedValue();
-      usersApi.fetchUsers.mockResolvedValueOnce(mockApiResponse)
-        .mockResolvedValueOnce({ users: [mockUsers[1]], total: 1, totalPages: 1 });
+      usersApi.fetchUsers
+        .mockResolvedValueOnce(mockApiResponse)
+        .mockResolvedValueOnce({
+          users: [mockUsers[1]],
+          total: 1,
+          totalPages: 1,
+        });
 
       renderUserManagementPage();
 
@@ -371,8 +409,10 @@ describe('UserManagementPage Integration Tests', () => {
 
       // Click delete button - click first delete button
       const allButtons = screen.getAllByRole('button');
-      const deleteButtons = allButtons.filter(btn =>
-        btn.hasAttribute('title') && btn.getAttribute('title') === 'Delete User'
+      const deleteButtons = allButtons.filter(
+        (btn) =>
+          btn.hasAttribute('title') &&
+          btn.getAttribute('title') === 'Delete User'
       );
       await user.click(deleteButtons[0]);
 
@@ -402,8 +442,10 @@ describe('UserManagementPage Integration Tests', () => {
 
       // Click delete button - click first delete button
       const allButtons = screen.getAllByRole('button');
-      const deleteButtons = allButtons.filter(btn =>
-        btn.hasAttribute('title') && btn.getAttribute('title') === 'Delete User'
+      const deleteButtons = allButtons.filter(
+        (btn) =>
+          btn.hasAttribute('title') &&
+          btn.getAttribute('title') === 'Delete User'
       );
       await user.click(deleteButtons[0]);
 
@@ -419,9 +461,14 @@ describe('UserManagementPage Integration Tests', () => {
   describe('Search and Filter', () => {
     it('should filter users by search query', async () => {
       const user = userEvent.setup();
-      const filteredResponse = { users: [mockUsers[0]], total: 1, totalPages: 1 };
+      const filteredResponse = {
+        users: [mockUsers[0]],
+        total: 1,
+        totalPages: 1,
+      };
 
-      usersApi.fetchUsers.mockResolvedValueOnce(mockApiResponse)
+      usersApi.fetchUsers
+        .mockResolvedValueOnce(mockApiResponse)
         .mockResolvedValueOnce(filteredResponse);
 
       renderUserManagementPage();
@@ -431,7 +478,9 @@ describe('UserManagementPage Integration Tests', () => {
       });
 
       // Type in search box
-      const searchInput = screen.getByPlaceholderText(/search by username or email/i);
+      const searchInput = screen.getByPlaceholderText(
+        /search by username or email/i
+      );
       await user.type(searchInput, 'testuser');
 
       await waitFor(() => {
@@ -445,9 +494,14 @@ describe('UserManagementPage Integration Tests', () => {
 
     it('should filter users by status', async () => {
       const user = userEvent.setup();
-      const filteredResponse = { users: [mockUsers[0]], total: 1, totalPages: 1 };
+      const filteredResponse = {
+        users: [mockUsers[0]],
+        total: 1,
+        totalPages: 1,
+      };
 
-      usersApi.fetchUsers.mockResolvedValueOnce(mockApiResponse)
+      usersApi.fetchUsers
+        .mockResolvedValueOnce(mockApiResponse)
         .mockResolvedValueOnce(filteredResponse);
 
       renderUserManagementPage();
@@ -471,9 +525,14 @@ describe('UserManagementPage Integration Tests', () => {
 
     it('should filter users by role', async () => {
       const user = userEvent.setup();
-      const filteredResponse = { users: [mockUsers[1]], total: 1, totalPages: 1 };
+      const filteredResponse = {
+        users: [mockUsers[1]],
+        total: 1,
+        totalPages: 1,
+      };
 
-      usersApi.fetchUsers.mockResolvedValueOnce(mockApiResponse)
+      usersApi.fetchUsers
+        .mockResolvedValueOnce(mockApiResponse)
         .mockResolvedValueOnce(filteredResponse);
 
       renderUserManagementPage();
@@ -529,10 +588,13 @@ describe('UserManagementPage Integration Tests', () => {
       const store = createMockStore();
       renderUserManagementPage(store);
 
-      await waitFor(() => {
-        const state = store.getState();
-        expect(state.users.error).toBeTruthy();
-      }, { timeout: 3000 });
+      await waitFor(
+        () => {
+          const state = store.getState();
+          expect(state.users.error).toBeTruthy();
+        },
+        { timeout: 3000 }
+      );
     });
 
     it('should allow dismissing error message', async () => {

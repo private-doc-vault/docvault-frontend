@@ -62,7 +62,9 @@ describe('usersSlice', () => {
 
   describe('reducers', () => {
     it('should return the initial state', () => {
-      expect(usersReducer(undefined, { type: 'unknown' })).toEqual(initialState);
+      expect(usersReducer(undefined, { type: 'unknown' })).toEqual(
+        initialState
+      );
     });
 
     it('should handle setUsers', () => {
@@ -79,10 +81,7 @@ describe('usersSlice', () => {
         pagination: { ...initialState.pagination, totalItems: 1 },
       };
 
-      const actual = usersReducer(
-        stateWithUsers,
-        addUser(mockUsers[1])
-      );
+      const actual = usersReducer(stateWithUsers, addUser(mockUsers[1]));
 
       expect(actual.users).toHaveLength(2);
       expect(actual.users[0]).toEqual(mockUsers[1]); // Added to front
@@ -101,10 +100,7 @@ describe('usersSlice', () => {
         status: 'inactive',
       };
 
-      const actual = usersReducer(
-        stateWithUsers,
-        updateUser(updatedUser)
-      );
+      const actual = usersReducer(stateWithUsers, updateUser(updatedUser));
 
       expect(actual.users[0].email).toBe('updated@example.com');
       expect(actual.users[0].status).toBe('inactive');
@@ -123,10 +119,7 @@ describe('usersSlice', () => {
         email: 'updated@example.com',
       };
 
-      const actual = usersReducer(
-        stateWithSelection,
-        updateUser(updatedUser)
-      );
+      const actual = usersReducer(stateWithSelection, updateUser(updatedUser));
 
       expect(actual.selectedUser.email).toBe('updated@example.com');
       expect(actual.users[0].email).toBe('updated@example.com');
@@ -161,10 +154,7 @@ describe('usersSlice', () => {
     });
 
     it('should handle setSelectedUser', () => {
-      const actual = usersReducer(
-        initialState,
-        setSelectedUser(mockUser)
-      );
+      const actual = usersReducer(initialState, setSelectedUser(mockUser));
 
       expect(actual.selectedUser).toEqual(mockUser);
     });

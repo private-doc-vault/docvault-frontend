@@ -37,10 +37,7 @@ import {
  *     stopPolling: function
  *   }
  */
-const useOcrPolling = (
-  documentId,
-  options = {}
-) => {
+const useOcrPolling = (documentId, options = {}) => {
   const {
     enabled = true,
     interval = 2000, // 2 seconds
@@ -104,7 +101,10 @@ const useOcrPolling = (
 
       return data;
     } catch (error) {
-      console.error(`Failed to fetch OCR status for document ${documentId}:`, error);
+      console.error(
+        `Failed to fetch OCR status for document ${documentId}:`,
+        error
+      );
 
       // Stop polling on error
       dispatch(stopPolling({ documentId }));

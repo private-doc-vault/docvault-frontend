@@ -138,9 +138,12 @@ const usersApi = {
    */
   resetPassword: async (userId, newPassword) => {
     try {
-      const response = await apiClient.post(`/admin/users/${userId}/reset-password`, {
-        password: newPassword,
-      });
+      const response = await apiClient.post(
+        `/admin/users/${userId}/reset-password`,
+        {
+          password: newPassword,
+        }
+      );
       return response.data;
     } catch (error) {
       throw error;

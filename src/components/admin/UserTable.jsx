@@ -1,12 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Table,
-  Badge,
-  Button,
-  ButtonGroup,
-  Dropdown,
-} from 'react-bootstrap';
+import { Table, Badge, Button, ButtonGroup, Dropdown } from 'react-bootstrap';
 import {
   ArrowUp,
   ArrowDown,
@@ -41,7 +35,10 @@ const getRoleBadgeVariant = (role) => {
 const formatRoleName = (role) => {
   if (!role) return '';
   // Remove ROLE_ prefix if present
-  return role.replace('ROLE_', '').charAt(0) + role.replace('ROLE_', '').slice(1).toLowerCase();
+  return (
+    role.replace('ROLE_', '').charAt(0) +
+    role.replace('ROLE_', '').slice(1).toLowerCase()
+  );
 };
 
 /**
@@ -106,7 +103,11 @@ const UserTable = ({ users, onEdit, onDelete }) => {
    * Handle user deletion
    */
   const handleDelete = (user) => {
-    if (!window.confirm(`Are you sure you want to delete user "${user.username}"?`)) {
+    if (
+      !window.confirm(
+        `Are you sure you want to delete user "${user.username}"?`
+      )
+    ) {
       return;
     }
     if (onDelete) {
@@ -141,9 +142,7 @@ const UserTable = ({ users, onEdit, onDelete }) => {
             >
               Email {renderSortIndicator('email')}
             </th>
-            <th className="d-none d-lg-table-cell">
-              Roles
-            </th>
+            <th className="d-none d-lg-table-cell">Roles</th>
             <th
               style={{ cursor: 'pointer', userSelect: 'none' }}
               onClick={() => handleSort('status')}

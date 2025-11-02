@@ -68,11 +68,16 @@ describe('documentsSlice', () => {
 
   describe('reducers', () => {
     it('should return the initial state', () => {
-      expect(documentsReducer(undefined, { type: 'unknown' })).toEqual(initialState);
+      expect(documentsReducer(undefined, { type: 'unknown' })).toEqual(
+        initialState
+      );
     });
 
     it('should handle setDocuments', () => {
-      const actual = documentsReducer(initialState, setDocuments(mockDocuments));
+      const actual = documentsReducer(
+        initialState,
+        setDocuments(mockDocuments)
+      );
       expect(actual.documents).toEqual(mockDocuments);
       expect(actual.loading).toBe(false);
       expect(actual.error).toBe(null);

@@ -1,13 +1,6 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Modal,
-  Card,
-  Badge,
-  ListGroup,
-  Spinner,
-  Alert,
-} from 'react-bootstrap';
+import { Modal, Card, Badge, ListGroup, Spinner, Alert } from 'react-bootstrap';
 import rolesApi from '../../api/rolesApi';
 
 /**
@@ -51,7 +44,9 @@ const RoleForm = ({ show, onHide, role, permissions, readOnly = false }) => {
 
     return role.permissions
       .map((permId) => {
-        const perm = permissions.find((p) => p.id === permId || p.name === permId);
+        const perm = permissions.find(
+          (p) => p.id === permId || p.name === permId
+        );
         return perm?.name || permId;
       })
       .sort();
@@ -106,7 +101,9 @@ const RoleForm = ({ show, onHide, role, permissions, readOnly = false }) => {
                 ))}
               </div>
             ) : (
-              <p className="text-muted mb-0">No permissions assigned to this role</p>
+              <p className="text-muted mb-0">
+                No permissions assigned to this role
+              </p>
             )}
           </Card.Body>
         </Card>
@@ -145,8 +142,8 @@ const RoleForm = ({ show, onHide, role, permissions, readOnly = false }) => {
                           user.status === 'active'
                             ? 'success'
                             : user.status === 'locked'
-                            ? 'danger'
-                            : 'secondary'
+                              ? 'danger'
+                              : 'secondary'
                         }
                       >
                         {user.status || 'unknown'}
@@ -158,7 +155,9 @@ const RoleForm = ({ show, onHide, role, permissions, readOnly = false }) => {
             )}
 
             {!loading && !error && users.length === 0 && (
-              <p className="text-muted mb-0">No users currently assigned to this role</p>
+              <p className="text-muted mb-0">
+                No users currently assigned to this role
+              </p>
             )}
           </Card.Body>
         </Card>

@@ -74,7 +74,9 @@ const UserManagementPage = () => {
       dispatch(
         setPagination({
           totalItems: response.total || response.totalItems || 0,
-          totalPages: response.totalPages || Math.ceil((response.total || 0) / pagination.pageSize),
+          totalPages:
+            response.totalPages ||
+            Math.ceil((response.total || 0) / pagination.pageSize),
         })
       );
     } catch (err) {
@@ -158,7 +160,9 @@ const UserManagementPage = () => {
       fetchUsers();
     } catch (err) {
       console.error('Failed to delete user:', err);
-      dispatch(setError(err.response?.data?.message || 'Failed to delete user'));
+      dispatch(
+        setError(err.response?.data?.message || 'Failed to delete user')
+      );
     }
   };
 
@@ -227,7 +231,11 @@ const UserManagementPage = () => {
 
       {/* Error Alert */}
       {error && (
-        <Alert variant="danger" dismissible onClose={() => dispatch(clearError())}>
+        <Alert
+          variant="danger"
+          dismissible
+          onClose={() => dispatch(clearError())}
+        >
           {error}
         </Alert>
       )}

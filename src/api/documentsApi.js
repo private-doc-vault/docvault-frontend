@@ -70,7 +70,8 @@ const documentsApi = {
 
       // Add metadata fields if provided
       if (metadata.title) formData.append('title', metadata.title);
-      if (metadata.description) formData.append('description', metadata.description);
+      if (metadata.description)
+        formData.append('description', metadata.description);
       if (metadata.category) formData.append('category', metadata.category);
       if (metadata.tags && Array.isArray(metadata.tags)) {
         metadata.tags.forEach((tag) => formData.append('tags[]', tag));
@@ -135,9 +136,12 @@ const documentsApi = {
    */
   downloadDocument: async (documentId) => {
     try {
-      const response = await apiClient.get(`/documents/${documentId}/download`, {
-        responseType: 'blob',
-      });
+      const response = await apiClient.get(
+        `/documents/${documentId}/download`,
+        {
+          responseType: 'blob',
+        }
+      );
       return response.data;
     } catch (error) {
       throw error;
@@ -151,9 +155,12 @@ const documentsApi = {
    */
   getDocumentThumbnail: async (documentId) => {
     try {
-      const response = await apiClient.get(`/documents/${documentId}/thumbnail`, {
-        responseType: 'blob',
-      });
+      const response = await apiClient.get(
+        `/documents/${documentId}/thumbnail`,
+        {
+          responseType: 'blob',
+        }
+      );
       return URL.createObjectURL(response.data);
     } catch {
       // Return null if thumbnail doesn't exist
@@ -168,7 +175,9 @@ const documentsApi = {
    */
   retryOcrProcessing: async (documentId) => {
     try {
-      const response = await apiClient.post(`/documents/${documentId}/retry-processing`);
+      const response = await apiClient.post(
+        `/documents/${documentId}/retry-processing`
+      );
       return response.data;
     } catch (error) {
       throw error;
@@ -182,7 +191,9 @@ const documentsApi = {
    */
   fetchOcrStatus: async (documentId) => {
     try {
-      const response = await apiClient.get(`/documents/${documentId}/ocr-status`);
+      const response = await apiClient.get(
+        `/documents/${documentId}/ocr-status`
+      );
       return response.data;
     } catch (error) {
       throw error;
@@ -215,9 +226,7 @@ const documentsApi = {
         return documentsApi.uploadDocument(
           file,
           {},
-          onProgress
-            ? (percent) => onProgress(index, file.name, percent)
-            : null
+          onProgress ? (percent) => onProgress(index, file.name, percent) : null
         );
       });
 

@@ -70,7 +70,9 @@ const ActivityChart = ({
       setData(chartData);
     } catch (err) {
       console.error(`Error fetching ${type} chart data:`, err);
-      setError(`Failed to load chart data. ${err.message || 'Please try again.'}`);
+      setError(
+        `Failed to load chart data. ${err.message || 'Please try again.'}`
+      );
     } finally {
       setLoading(false);
     }
@@ -125,7 +127,9 @@ const ActivityChart = ({
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       const value = payload[0].value;
-      const displayValue = config.formatValue ? config.formatValue(value) : value;
+      const displayValue = config.formatValue
+        ? config.formatValue(value)
+        : value;
 
       return (
         <div
@@ -167,7 +171,11 @@ const ActivityChart = ({
             <YAxis tickFormatter={formatYAxisTick} />
             <Tooltip content={<CustomTooltip />} />
             <Legend />
-            <Bar dataKey={config.dataKey} fill={config.color} name={config.label} />
+            <Bar
+              dataKey={config.dataKey}
+              fill={config.color}
+              name={config.label}
+            />
           </BarChart>
         );
 

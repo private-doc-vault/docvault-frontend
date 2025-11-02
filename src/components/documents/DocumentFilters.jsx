@@ -71,7 +71,12 @@ const DocumentFilters = () => {
 
   // Auto-expand advanced filters if any are set
   useEffect(() => {
-    if (filters.category || filters.status || filters.dateFrom || filters.dateTo) {
+    if (
+      filters.category ||
+      filters.status ||
+      filters.dateFrom ||
+      filters.dateTo
+    ) {
       setShowAdvanced(true);
     }
   }, [filters.category, filters.status, filters.dateFrom, filters.dateTo]);
@@ -179,7 +184,12 @@ const DocumentFilters = () => {
           </Col>
 
           {/* Filter Toggle Button */}
-          <Col xs={12} md={4} lg={6} className="d-flex gap-2 justify-content-md-end">
+          <Col
+            xs={12}
+            md={4}
+            lg={6}
+            className="d-flex gap-2 justify-content-md-end"
+          >
             <Button
               variant={showAdvanced ? 'primary' : 'outline-secondary'}
               onClick={() => setShowAdvanced(!showAdvanced)}
@@ -214,7 +224,9 @@ const DocumentFilters = () => {
                   <Form.Label className="small fw-medium">Category</Form.Label>
                   <Form.Select
                     value={localFilters.category}
-                    onChange={(e) => handleLocalChange('category', e.target.value)}
+                    onChange={(e) =>
+                      handleLocalChange('category', e.target.value)
+                    }
                     aria-label="Filter by category"
                   >
                     <option value="">All Categories</option>
@@ -230,10 +242,14 @@ const DocumentFilters = () => {
               {/* Status Filter */}
               <Col xs={12} sm={6} md={3}>
                 <Form.Group>
-                  <Form.Label className="small fw-medium">OCR Status</Form.Label>
+                  <Form.Label className="small fw-medium">
+                    OCR Status
+                  </Form.Label>
                   <Form.Select
                     value={localFilters.status}
-                    onChange={(e) => handleLocalChange('status', e.target.value)}
+                    onChange={(e) =>
+                      handleLocalChange('status', e.target.value)
+                    }
                     aria-label="Filter by status"
                   >
                     <option value="">All Statuses</option>
@@ -253,7 +269,9 @@ const DocumentFilters = () => {
                   <Form.Control
                     type="date"
                     value={localFilters.dateFrom}
-                    onChange={(e) => handleLocalChange('dateFrom', e.target.value)}
+                    onChange={(e) =>
+                      handleLocalChange('dateFrom', e.target.value)
+                    }
                     max={localFilters.dateTo || undefined}
                     aria-label="Filter from date"
                   />
@@ -267,7 +285,9 @@ const DocumentFilters = () => {
                   <Form.Control
                     type="date"
                     value={localFilters.dateTo}
-                    onChange={(e) => handleLocalChange('dateTo', e.target.value)}
+                    onChange={(e) =>
+                      handleLocalChange('dateTo', e.target.value)
+                    }
                     min={localFilters.dateFrom || undefined}
                     aria-label="Filter to date"
                   />

@@ -135,10 +135,7 @@ export const mockDocumentListResponse = {
 
 // Mock Search Results
 export const mockSearchResults = {
-  results: [
-    mockDocuments.pdfDocument,
-    mockDocuments.imageDocument,
-  ],
+  results: [mockDocuments.pdfDocument, mockDocuments.imageDocument],
   total: 2,
   query: 'invoice',
   facets: {

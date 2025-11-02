@@ -50,12 +50,13 @@ const AdminDashboardPage = () => {
 
     try {
       // Fetch all dashboard data in parallel
-      const [metricsData, healthData, queueData, errorsData] = await Promise.allSettled([
-        fetchDashboardMetrics(),
-        fetchSystemStatus(),
-        fetchQueueStatus(),
-        fetchRecentErrors(),
-      ]);
+      const [metricsData, healthData, queueData, errorsData] =
+        await Promise.allSettled([
+          fetchDashboardMetrics(),
+          fetchSystemStatus(),
+          fetchQueueStatus(),
+          fetchRecentErrors(),
+        ]);
 
       // Update metrics if successful
       if (metricsData.status === 'fulfilled') {
@@ -187,7 +188,9 @@ const AdminDashboardPage = () => {
                 onClick={handleRefresh}
                 disabled={loading}
               >
-                <ArrowClockwise className={loading ? 'spinner-border spinner-border-sm' : ''} />{' '}
+                <ArrowClockwise
+                  className={loading ? 'spinner-border spinner-border-sm' : ''}
+                />{' '}
                 Refresh
               </Button>
             </div>
@@ -199,7 +202,11 @@ const AdminDashboardPage = () => {
       {error && (
         <Row className="mb-3">
           <Col>
-            <Alert variant="warning" dismissible onClose={() => dispatch(setError(null))}>
+            <Alert
+              variant="warning"
+              dismissible
+              onClose={() => dispatch(setError(null))}
+            >
               {error}
             </Alert>
           </Col>
@@ -264,7 +271,10 @@ const AdminDashboardPage = () => {
       {/* Activity Charts */}
       <Row className="mb-4">
         <Col xs={12} lg={6} className="mb-3">
-          <ActivityChart title="Documents Processed (Last 7 Days)" type="documents" />
+          <ActivityChart
+            title="Documents Processed (Last 7 Days)"
+            type="documents"
+          />
         </Col>
         <Col xs={12} lg={6} className="mb-3">
           <ActivityChart title="User Activity (Last 7 Days)" type="users" />
@@ -273,7 +283,10 @@ const AdminDashboardPage = () => {
 
       <Row className="mb-4">
         <Col>
-          <ActivityChart title="Storage Usage Trend (Last 30 Days)" type="storage" />
+          <ActivityChart
+            title="Storage Usage Trend (Last 30 Days)"
+            type="storage"
+          />
         </Col>
       </Row>
 
@@ -287,7 +300,11 @@ const AdminDashboardPage = () => {
               </div>
               <div className="card-body">
                 {recentErrors.map((error, index) => (
-                  <Alert key={error.id || index} variant="danger" className="mb-2">
+                  <Alert
+                    key={error.id || index}
+                    variant="danger"
+                    className="mb-2"
+                  >
                     <div className="d-flex justify-content-between">
                       <div>
                         <strong>{error.type}:</strong> {error.message}
@@ -298,8 +315,12 @@ const AdminDashboardPage = () => {
                     </div>
                     {error.details && (
                       <details className="mt-2">
-                        <summary style={{ cursor: 'pointer' }}>Show details</summary>
-                        <pre className="mt-2 mb-0 small">{JSON.stringify(error.details, null, 2)}</pre>
+                        <summary style={{ cursor: 'pointer' }}>
+                          Show details
+                        </summary>
+                        <pre className="mt-2 mb-0 small">
+                          {JSON.stringify(error.details, null, 2)}
+                        </pre>
                       </details>
                     )}
                   </Alert>

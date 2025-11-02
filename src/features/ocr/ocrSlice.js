@@ -35,7 +35,8 @@ const ocrSlice = createSlice({
      * @param {Object} payload - { documentId, status, progress?, text?, error?, lastUpdated? }
      */
     setOcrStatus: (state, action) => {
-      const { documentId, status, progress, text, error, lastUpdated } = action.payload;
+      const { documentId, status, progress, text, error, lastUpdated } =
+        action.payload;
 
       if (!state.ocrData[documentId]) {
         state.ocrData[documentId] = {};
@@ -55,7 +56,8 @@ const ocrSlice = createSlice({
         state.ocrData[documentId].error = error;
       }
 
-      state.ocrData[documentId].lastUpdated = lastUpdated || new Date().toISOString();
+      state.ocrData[documentId].lastUpdated =
+        lastUpdated || new Date().toISOString();
     },
 
     /**

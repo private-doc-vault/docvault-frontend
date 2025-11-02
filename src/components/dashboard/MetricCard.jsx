@@ -28,10 +28,17 @@ const MetricCard = ({
   trendValue = null,
 }) => {
   // Get the icon component dynamically
-  const IconComponent = Icons[icon.split('-').map((word, index) =>
-    index === 0 ? word.charAt(0).toUpperCase() + word.slice(1) :
-    word.charAt(0).toUpperCase() + word.slice(1)
-  ).join('')] || Icons.InfoCircle;
+  const IconComponent =
+    Icons[
+      icon
+        .split('-')
+        .map((word, index) =>
+          index === 0
+            ? word.charAt(0).toUpperCase() + word.slice(1)
+            : word.charAt(0).toUpperCase() + word.slice(1)
+        )
+        .join('')
+    ] || Icons.InfoCircle;
 
   // Format the display value
   const getDisplayValue = () => {
@@ -90,7 +97,10 @@ const MetricCard = ({
   };
 
   return (
-    <Card className={`h-100 ${getBorderClass()}`} style={{ borderLeftWidth: '4px' }}>
+    <Card
+      className={`h-100 ${getBorderClass()}`}
+      style={{ borderLeftWidth: '4px' }}
+    >
       <Card.Body>
         <div className="d-flex justify-content-between align-items-start mb-3">
           <div className={`text-${variant}`}>
@@ -99,7 +109,10 @@ const MetricCard = ({
         </div>
 
         <div>
-          <h6 className="text-muted text-uppercase mb-2" style={{ fontSize: '0.75rem', fontWeight: 600 }}>
+          <h6
+            className="text-muted text-uppercase mb-2"
+            style={{ fontSize: '0.75rem', fontWeight: 600 }}
+          >
             {title}
           </h6>
 
@@ -110,7 +123,8 @@ const MetricCard = ({
           ) : (
             <div className="d-flex align-items-baseline">
               <h2 className="mb-0" style={{ fontWeight: 700 }}>
-                {getDisplayValue()}{suffix}
+                {getDisplayValue()}
+                {suffix}
               </h2>
               {getTrendInfo()}
             </div>

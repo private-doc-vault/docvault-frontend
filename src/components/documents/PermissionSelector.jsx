@@ -28,7 +28,12 @@ const PERMISSION_LEVELS = [
 /**
  * PermissionSelector - Dropdown for selecting share permissions
  */
-const PermissionSelector = ({ value, onChange, disabled = false, size = 'md' }) => {
+const PermissionSelector = ({
+  value,
+  onChange,
+  disabled = false,
+  size = 'md',
+}) => {
   /**
    * Get permission level value from permissions array
    */

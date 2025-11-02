@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-  ListGroup,
-  Badge,
-  Button,
-  ButtonGroup,
-} from 'react-bootstrap';
+import { ListGroup, Badge, Button, ButtonGroup } from 'react-bootstrap';
 import { Trash, PersonCircle } from 'react-bootstrap-icons';
 import PermissionSelector from './PermissionSelector';
 
 /**
  * ShareList - Displays list of users with access to a document
  */
-const ShareList = ({ shares, onUpdatePermissions, onRevoke, currentUserId }) => {
+const ShareList = ({
+  shares,
+  onUpdatePermissions,
+  onRevoke,
+  currentUserId,
+}) => {
   const [updating, setUpdating] = useState({});
 
   /**
@@ -38,7 +38,9 @@ const ShareList = ({ shares, onUpdatePermissions, onRevoke, currentUserId }) => 
     if (!onRevoke) return;
 
     const username = share.user?.username || share.username || 'this user';
-    if (!window.confirm(`Are you sure you want to revoke access for ${username}?`)) {
+    if (
+      !window.confirm(`Are you sure you want to revoke access for ${username}?`)
+    ) {
       return;
     }
 

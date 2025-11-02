@@ -48,7 +48,9 @@ describe('rolesSlice', () => {
 
   describe('reducers', () => {
     it('should return the initial state', () => {
-      expect(rolesReducer(undefined, { type: 'unknown' })).toEqual(initialState);
+      expect(rolesReducer(undefined, { type: 'unknown' })).toEqual(
+        initialState
+      );
     });
 
     it('should handle setRoles', () => {
@@ -59,14 +61,20 @@ describe('rolesSlice', () => {
     });
 
     it('should handle setPermissions', () => {
-      const actual = rolesReducer(initialState, setPermissions(mockPermissions));
+      const actual = rolesReducer(
+        initialState,
+        setPermissions(mockPermissions)
+      );
       expect(actual.permissions).toEqual(mockPermissions);
       expect(actual.loading).toBe(false);
       expect(actual.error).toBe(null);
     });
 
     it('should handle setRolePermissions', () => {
-      const actual = rolesReducer(initialState, setRolePermissions(mockRolePermissions));
+      const actual = rolesReducer(
+        initialState,
+        setRolePermissions(mockRolePermissions)
+      );
       expect(actual.rolePermissions).toEqual(mockRolePermissions);
       expect(actual.unsavedChanges).toBe(false);
       expect(actual.loading).toBe(false);

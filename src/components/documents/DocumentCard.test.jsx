@@ -208,7 +208,8 @@ describe('DocumentCard', () => {
   it('should truncate long filenames with title attribute', () => {
     const longTitleDoc = {
       ...mockDocument,
-      title: 'This is a very long document title that should be truncated in the UI',
+      title:
+        'This is a very long document title that should be truncated in the UI',
     };
 
     renderCard({ document: longTitleDoc });

@@ -24,7 +24,9 @@ describe('sharingSlice', () => {
     };
 
     it('should return the initial state', () => {
-      expect(sharingReducer(undefined, { type: 'unknown' })).toEqual(initialState);
+      expect(sharingReducer(undefined, { type: 'unknown' })).toEqual(
+        initialState
+      );
     });
 
     it('should handle setShares', () => {

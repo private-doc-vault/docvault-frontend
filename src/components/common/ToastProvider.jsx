@@ -16,7 +16,12 @@ const ToastProvider = () => {
     dispatch(hideToast(toastId));
   };
 
-  return <ToastNotificationContainer toasts={toasts} onRemoveToast={handleRemoveToast} />;
+  return (
+    <ToastNotificationContainer
+      toasts={toasts}
+      onRemoveToast={handleRemoveToast}
+    />
+  );
 };
 
 export default ToastProvider;

@@ -45,7 +45,9 @@ describe('ErrorBoundary', () => {
         </ErrorBoundary>
       );
 
-      expect(screen.queryByText(/something went wrong/i)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(/something went wrong/i)
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -68,7 +70,9 @@ describe('ErrorBoundary', () => {
         </ErrorBoundary>
       );
 
-      expect(screen.getByText(/oops! something went wrong/i)).toBeInTheDocument();
+      expect(
+        screen.getByText(/oops! something went wrong/i)
+      ).toBeInTheDocument();
     });
 
     it('should display error message', () => {
@@ -90,7 +94,9 @@ describe('ErrorBoundary', () => {
         </ErrorBoundary>
       );
 
-      expect(screen.getByRole('button', { name: /try again/i })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /try again/i })
+      ).toBeInTheDocument();
     });
 
     it('should display Reload Page button', () => {
@@ -100,7 +106,9 @@ describe('ErrorBoundary', () => {
         </ErrorBoundary>
       );
 
-      expect(screen.getByRole('button', { name: /reload page/i })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /reload page/i })
+      ).toBeInTheDocument();
     });
   });
 
@@ -132,7 +140,9 @@ describe('ErrorBoundary', () => {
 
       // Should show normal content
       expect(screen.getByText('No error')).toBeInTheDocument();
-      expect(screen.queryByText(/something went wrong/i)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(/something went wrong/i)
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -182,9 +192,13 @@ describe('ErrorBoundary', () => {
         </ErrorBoundary>
       );
 
-      expect(screen.getByRole('heading', { name: 'Custom Error UI' })).toBeInTheDocument();
+      expect(
+        screen.getByRole('heading', { name: 'Custom Error UI' })
+      ).toBeInTheDocument();
       expect(screen.getByText('Test error message')).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /custom reset/i })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /custom reset/i })
+      ).toBeInTheDocument();
     });
 
     it('should call resetError from custom fallback', () => {

@@ -46,7 +46,8 @@ const formatFileSize = (bytes) => {
   if (!bytes) return 'N/A';
   if (bytes < 1024) return bytes + ' B';
   if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-  if (bytes < 1024 * 1024 * 1024) return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  if (bytes < 1024 * 1024 * 1024)
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
   return (bytes / (1024 * 1024 * 1024)).toFixed(1) + ' GB';
 };
 
@@ -69,7 +70,9 @@ const DocumentDetailPage = () => {
 
   // Use OCR polling hook for documents in processing/pending status
   useOcrPolling(id, {
-    enabled: selectedDocument?.ocrStatus === 'processing' || selectedDocument?.ocrStatus === 'pending',
+    enabled:
+      selectedDocument?.ocrStatus === 'processing' ||
+      selectedDocument?.ocrStatus === 'pending',
     onComplete: () => {
       console.log('OCR processing completed!');
       // Refetch document to get latest data
@@ -169,7 +172,7 @@ const DocumentDetailPage = () => {
       // Navigate back to document list
       navigate('/documents', {
         replace: true,
-        state: { message: 'Document deleted successfully' }
+        state: { message: 'Document deleted successfully' },
       });
     } catch (error) {
       console.error('Failed to delete document:', error);
@@ -235,7 +238,10 @@ const DocumentDetailPage = () => {
           <p>{error || 'Document not found'}</p>
           <hr />
           <div className="d-flex justify-content-end">
-            <Button variant="outline-danger" onClick={() => navigate('/documents')}>
+            <Button
+              variant="outline-danger"
+              onClick={() => navigate('/documents')}
+            >
               Back to Documents
             </Button>
           </div>
@@ -250,7 +256,10 @@ const DocumentDetailPage = () => {
     <Container fluid className="py-4">
       {/* Breadcrumb */}
       <Breadcrumb className="mb-3">
-        <Breadcrumb.Item onClick={() => navigate('/documents')} style={{ cursor: 'pointer' }}>
+        <Breadcrumb.Item
+          onClick={() => navigate('/documents')}
+          style={{ cursor: 'pointer' }}
+        >
           Documents
         </Breadcrumb.Item>
         <Breadcrumb.Item active>{doc.title || doc.filename}</Breadcrumb.Item>
@@ -368,7 +377,8 @@ const DocumentDetailPage = () => {
                 </div>
 
                 {/* OCR Progress Bar */}
-                {(doc.ocrStatus === 'processing' || doc.ocrStatus === 'pending') && (
+                {(doc.ocrStatus === 'processing' ||
+                  doc.ocrStatus === 'pending') && (
                   <div className="mt-2">
                     <OcrProgressBar
                       progress={doc.ocrProgress || 0}

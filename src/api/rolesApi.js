@@ -66,9 +66,12 @@ const rolesApi = {
    */
   updateRolePermissions: async (roleId, permissionIds) => {
     try {
-      const response = await apiClient.put(`/admin/roles/${roleId}/permissions`, {
-        permissions: permissionIds,
-      });
+      const response = await apiClient.put(
+        `/admin/roles/${roleId}/permissions`,
+        {
+          permissions: permissionIds,
+        }
+      );
       return response.data;
     } catch (error) {
       throw error;

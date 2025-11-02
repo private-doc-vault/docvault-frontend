@@ -53,13 +53,7 @@ export const fetchAuditLogs = async (params = {}) => {
  * @returns {Promise} Resolves to Blob
  */
 export const exportAuditLogs = async (params = {}) => {
-  const {
-    documentId,
-    userId,
-    action,
-    startDate,
-    endDate,
-  } = params;
+  const { documentId, userId, action, startDate, endDate } = params;
 
   const queryParams = new URLSearchParams();
 
@@ -70,9 +64,12 @@ export const exportAuditLogs = async (params = {}) => {
   if (endDate) queryParams.append('endDate', endDate);
   queryParams.append('format', 'csv');
 
-  const response = await apiClient.get(`/audit-logs/export?${queryParams.toString()}`, {
-    responseType: 'blob',
-  });
+  const response = await apiClient.get(
+    `/audit-logs/export?${queryParams.toString()}`,
+    {
+      responseType: 'blob',
+    }
+  );
 
   return response.data;
 };
@@ -84,6 +81,10 @@ export const exportAuditLogs = async (params = {}) => {
  * @param {number} limit - Number of items per page
  * @returns {Promise} Resolves to { data: Array, pagination: Object }
  */
-export const fetchDocumentAuditLogs = async (documentId, page = 1, limit = 20) => {
+export const fetchDocumentAuditLogs = async (
+  documentId,
+  page = 1,
+  limit = 20
+) => {
   return fetchAuditLogs({ documentId, page, limit });
 };

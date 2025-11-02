@@ -50,7 +50,9 @@ describe('dashboardSlice', () => {
 
   describe('reducers', () => {
     it('should return the initial state', () => {
-      expect(dashboardReducer(undefined, { type: 'unknown' })).toEqual(initialState);
+      expect(dashboardReducer(undefined, { type: 'unknown' })).toEqual(
+        initialState
+      );
     });
 
     it('should handle setMetrics', () => {
@@ -104,7 +106,10 @@ describe('dashboardSlice', () => {
         },
       };
 
-      const actual = dashboardReducer(initialState, setSystemHealth(systemHealth));
+      const actual = dashboardReducer(
+        initialState,
+        setSystemHealth(systemHealth)
+      );
 
       expect(actual.systemHealth.status).toBe('healthy');
       expect(actual.systemHealth.services).toEqual(systemHealth.services);
@@ -126,7 +131,10 @@ describe('dashboardSlice', () => {
         ],
       };
 
-      const actual = dashboardReducer(initialState, setQueueStatus(queueStatus));
+      const actual = dashboardReducer(
+        initialState,
+        setQueueStatus(queueStatus)
+      );
 
       expect(actual.queueStatus).toEqual(queueStatus);
     });
@@ -306,15 +314,21 @@ describe('dashboardSlice', () => {
     });
 
     it('should select systemHealth', () => {
-      expect(selectSystemHealth(mockState)).toEqual(mockState.dashboard.systemHealth);
+      expect(selectSystemHealth(mockState)).toEqual(
+        mockState.dashboard.systemHealth
+      );
     });
 
     it('should select queueStatus', () => {
-      expect(selectQueueStatus(mockState)).toEqual(mockState.dashboard.queueStatus);
+      expect(selectQueueStatus(mockState)).toEqual(
+        mockState.dashboard.queueStatus
+      );
     });
 
     it('should select recentErrors', () => {
-      expect(selectRecentErrors(mockState)).toEqual(mockState.dashboard.recentErrors);
+      expect(selectRecentErrors(mockState)).toEqual(
+        mockState.dashboard.recentErrors
+      );
     });
 
     it('should select loading', () => {

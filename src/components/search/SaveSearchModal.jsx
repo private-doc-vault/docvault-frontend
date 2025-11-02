@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectQuery, selectFilters, addSavedSearch } from '../../features/search/searchSlice';
+import {
+  selectQuery,
+  selectFilters,
+  addSavedSearch,
+} from '../../features/search/searchSlice';
 import searchApi from '../../api/searchApi';
 
 /**
@@ -54,7 +58,10 @@ const SaveSearchModal = ({ show, onHide }) => {
       onHide();
     } catch (err) {
       console.error('Failed to save search:', err);
-      setError(err.response?.data?.message || 'Failed to save search. Please try again.');
+      setError(
+        err.response?.data?.message ||
+          'Failed to save search. Please try again.'
+      );
     } finally {
       setSaving(false);
     }
@@ -70,7 +77,8 @@ const SaveSearchModal = ({ show, onHide }) => {
   };
 
   // Check if there's anything to save
-  const hasSearchCriteria = query.trim() || Object.values(filters).some(v => v);
+  const hasSearchCriteria =
+    query.trim() || Object.values(filters).some((v) => v);
 
   return (
     <Modal show={show} onHide={handleClose} centered>
@@ -88,7 +96,8 @@ const SaveSearchModal = ({ show, onHide }) => {
 
           {!hasSearchCriteria && (
             <Alert variant="warning" className="mb-3">
-              You don&apos;t have any search criteria to save. Enter a search query or apply filters first.
+              You don&apos;t have any search criteria to save. Enter a search
+              query or apply filters first.
             </Alert>
           )}
 

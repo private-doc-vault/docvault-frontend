@@ -76,12 +76,16 @@ const DocumentListPage = () => {
       dispatch(
         setPagination({
           totalItems: response.total || response.totalItems || 0,
-          totalPages: response.totalPages || Math.ceil((response.total || 0) / pagination.pageSize),
+          totalPages:
+            response.totalPages ||
+            Math.ceil((response.total || 0) / pagination.pageSize),
         })
       );
     } catch (err) {
       console.error('Failed to fetch documents:', err);
-      dispatch(setError(err.response?.data?.message || 'Failed to load documents'));
+      dispatch(
+        setError(err.response?.data?.message || 'Failed to load documents')
+      );
     } finally {
       dispatch(setLoading(false));
     }
@@ -166,7 +170,11 @@ const DocumentListPage = () => {
 
       {/* Error Alert */}
       {error && (
-        <Alert variant="danger" dismissible onClose={() => dispatch(clearError())}>
+        <Alert
+          variant="danger"
+          dismissible
+          onClose={() => dispatch(clearError())}
+        >
           {error}
         </Alert>
       )}

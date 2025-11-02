@@ -1,17 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Card,
-  Button,
-  Spinner,
-  Alert,
-  Form,
-} from 'react-bootstrap';
-import {
-  Clipboard,
-  Check,
-  Download,
-  Search,
-} from 'react-bootstrap-icons';
+import { Card, Button, Spinner, Alert, Form } from 'react-bootstrap';
+import { Clipboard, Check, Download, Search } from 'react-bootstrap-icons';
 import PropTypes from 'prop-types';
 import ocrApi from '../../api/ocrApi';
 
@@ -28,7 +17,11 @@ import ocrApi from '../../api/ocrApi';
  * - Search/highlight within text
  * - Loading and error states
  */
-const OcrTextViewer = ({ documentId, ocrText: initialText = null, className = '' }) => {
+const OcrTextViewer = ({
+  documentId,
+  ocrText: initialText = null,
+  className = '',
+}) => {
   const [ocrText, setOcrText] = useState(initialText);
   const [loading, setLoading] = useState(!initialText);
   const [error, setError] = useState(null);
@@ -51,7 +44,7 @@ const OcrTextViewer = ({ documentId, ocrText: initialText = null, className = ''
           console.error('Failed to fetch OCR text:', err);
           setError(
             err.response?.data?.message ||
-            'Failed to load OCR text. The document may not have completed OCR processing yet.'
+              'Failed to load OCR text. The document may not have completed OCR processing yet.'
           );
         } finally {
           setLoading(false);
@@ -248,7 +241,10 @@ const OcrTextViewer = ({ documentId, ocrText: initialText = null, className = ''
         <div className="mt-3 text-muted small">
           <div className="d-flex justify-content-between">
             <span>Characters: {ocrText.length.toLocaleString()}</span>
-            <span>Words: {ocrText.split(/\s+/).filter(Boolean).length.toLocaleString()}</span>
+            <span>
+              Words:{' '}
+              {ocrText.split(/\s+/).filter(Boolean).length.toLocaleString()}
+            </span>
             <span>Lines: {ocrText.split('\n').length.toLocaleString()}</span>
           </div>
         </div>

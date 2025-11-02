@@ -20,7 +20,10 @@ export const handlers = [
   http.post(`${API_URL}/auth/login`, async ({ request }) => {
     const body = await request.json();
 
-    if (body.email === 'testuser@example.com' && body.password === 'password123') {
+    if (
+      body.email === 'testuser@example.com' &&
+      body.password === 'password123'
+    ) {
       return HttpResponse.json({
         user: mockUsers.regularUser,
         token: mockTokens.accessToken,
@@ -36,10 +39,7 @@ export const handlers = [
       });
     }
 
-    return HttpResponse.json(
-      { error: 'Invalid credentials' },
-      { status: 401 }
-    );
+    return HttpResponse.json({ error: 'Invalid credentials' }, { status: 401 });
   }),
 
   http.post(`${API_URL}/auth/logout`, () => {
@@ -99,10 +99,7 @@ export const handlers = [
     const file = formData.get('file');
 
     if (!file) {
-      return HttpResponse.json(
-        { error: 'File is required' },
-        { status: 422 }
-      );
+      return HttpResponse.json({ error: 'File is required' }, { status: 422 });
     }
 
     return HttpResponse.json(

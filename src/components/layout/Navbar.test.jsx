@@ -46,18 +46,26 @@ describe('Navbar', () => {
 
     it('should not render navigation links', () => {
       renderNavbar();
-      expect(screen.queryByRole('link', { name: 'Documents' })).not.toBeInTheDocument();
-      expect(screen.queryByRole('link', { name: 'Search' })).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole('link', { name: 'Documents' })
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole('link', { name: 'Search' })
+      ).not.toBeInTheDocument();
     });
 
     it('should not render search button', () => {
       renderNavbar();
-      expect(screen.queryByRole('button', { name: /search/i })).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole('button', { name: /search/i })
+      ).not.toBeInTheDocument();
     });
 
     it('should not render user menu', () => {
       renderNavbar();
-      expect(screen.queryByRole('button', { name: /user/i })).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole('button', { name: /user/i })
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -77,18 +85,24 @@ describe('Navbar', () => {
 
     it('should render navigation links', () => {
       renderNavbar(authenticatedState);
-      expect(screen.getByRole('link', { name: 'Documents' })).toBeInTheDocument();
+      expect(
+        screen.getByRole('link', { name: 'Documents' })
+      ).toBeInTheDocument();
       expect(screen.getByRole('link', { name: 'Search' })).toBeInTheDocument();
     });
 
     it('should render search button', () => {
       renderNavbar(authenticatedState);
-      expect(screen.getByRole('button', { name: /search documents/i })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /search documents/i })
+      ).toBeInTheDocument();
     });
 
     it('should render user menu with username', () => {
       renderNavbar(authenticatedState);
-      expect(screen.getByRole('button', { name: /testuser/i })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /testuser/i })
+      ).toBeInTheDocument();
     });
 
     it('should have correct link to documents page', () => {
@@ -118,7 +132,9 @@ describe('Navbar', () => {
       fireEvent.click(userMenuButton);
 
       expect(screen.getByRole('link', { name: 'Profile' })).toBeInTheDocument();
-      expect(screen.getByRole('link', { name: 'Settings' })).toBeInTheDocument();
+      expect(
+        screen.getByRole('link', { name: 'Settings' })
+      ).toBeInTheDocument();
       expect(screen.getByText('Logout')).toBeInTheDocument();
     });
 

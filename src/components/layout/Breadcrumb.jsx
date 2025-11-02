@@ -39,15 +39,19 @@ const AppBreadcrumb = ({ items = null }) => {
 
     // Generate from current path
     const pathSegments = location.pathname.split('/').filter(Boolean);
-    const breadcrumbs = [{ label: 'Home', path: ROUTES.HOME, icon: <HouseDoor /> }];
+    const breadcrumbs = [
+      { label: 'Home', path: ROUTES.HOME, icon: <HouseDoor /> },
+    ];
 
     let currentPath = '';
     pathSegments.forEach((segment) => {
       currentPath += `/${segment}`;
 
       // Check if this is a dynamic segment (e.g., document ID)
-      const isDynamicSegment = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(segment) ||
-                               /^\d+$/.test(segment);
+      const isDynamicSegment =
+        /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+          segment
+        ) || /^\d+$/.test(segment);
 
       if (isDynamicSegment) {
         // For dynamic segments, use a generic label
@@ -57,7 +61,9 @@ const AppBreadcrumb = ({ items = null }) => {
         });
       } else {
         // Look up the route name
-        const routeName = routeNames[currentPath] || segment.charAt(0).toUpperCase() + segment.slice(1);
+        const routeName =
+          routeNames[currentPath] ||
+          segment.charAt(0).toUpperCase() + segment.slice(1);
         breadcrumbs.push({
           label: routeName,
           path: currentPath,

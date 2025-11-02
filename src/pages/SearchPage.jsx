@@ -61,7 +61,7 @@ const SearchPage = () => {
    */
   const performSearch = useCallback(async () => {
     // Don't search if query is empty and no filters
-    if (!query.trim() && !Object.values(debouncedFilters).some(v => v)) {
+    if (!query.trim() && !Object.values(debouncedFilters).some((v) => v)) {
       return;
     }
 
@@ -88,17 +88,28 @@ const SearchPage = () => {
         setPagination({
           totalItems: response.total || response.estimatedTotalHits || 0,
           totalPages: Math.ceil(
-            (response.total || response.estimatedTotalHits || 0) / pagination.pageSize
+            (response.total || response.estimatedTotalHits || 0) /
+              pagination.pageSize
           ),
         })
       );
     } catch (err) {
       console.error('Search failed:', err);
-      dispatch(setError(err.response?.data?.message || 'Search failed. Please try again.'));
+      dispatch(
+        setError(
+          err.response?.data?.message || 'Search failed. Please try again.'
+        )
+      );
     } finally {
       dispatch(setLoading(false));
     }
-  }, [dispatch, query, debouncedFilters, pagination.currentPage, pagination.pageSize]);
+  }, [
+    dispatch,
+    query,
+    debouncedFilters,
+    pagination.currentPage,
+    pagination.pageSize,
+  ]);
 
   /**
    * Handle page change
@@ -124,7 +135,7 @@ const SearchPage = () => {
    * Perform search when page changes (for pagination)
    */
   useEffect(() => {
-    if (query.trim() || Object.values(debouncedFilters).some(v => v)) {
+    if (query.trim() || Object.values(debouncedFilters).some((v) => v)) {
       performSearch();
     }
   }, [pagination.currentPage, performSearch]); // Trigger on page change
@@ -144,14 +155,15 @@ const SearchPage = () => {
       dispatch(setPagination({ currentPage: 1 }));
     } else {
       // If already on page 1, trigger search directly
-      if (query.trim() || Object.values(debouncedFilters).some(v => v)) {
+      if (query.trim() || Object.values(debouncedFilters).some((v) => v)) {
         performSearch();
       }
     }
   }, [debouncedFilters]); // Only trigger when debounced filters change
 
   // Determine if we have search criteria
-  const hasSearchCriteria = query.trim() || Object.values(filters).some(v => v);
+  const hasSearchCriteria =
+    query.trim() || Object.values(filters).some((v) => v);
   const hasResults = results.length > 0;
 
   return (
@@ -160,7 +172,9 @@ const SearchPage = () => {
       <Row className="mb-4">
         <Col>
           <h1 className="h3 mb-0">Search Documents</h1>
-          <p className="text-muted">Search across all your documents using full-text search</p>
+          <p className="text-muted">
+            Search across all your documents using full-text search
+          </p>
         </Col>
         {hasSearchCriteria && (
           <Col xs="auto" className="d-flex align-items-center gap-2">
@@ -196,7 +210,11 @@ const SearchPage = () => {
 
           {/* Error Alert */}
           {error && (
-            <Alert variant="danger" dismissible onClose={() => dispatch(clearError())}>
+            <Alert
+              variant="danger"
+              dismissible
+              onClose={() => dispatch(clearError())}
+            >
               {error}
             </Alert>
           )}

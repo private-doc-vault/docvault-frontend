@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { Card, Badge, Row, Col, Table, Button, Alert, Placeholder } from 'react-bootstrap';
+import {
+  Card,
+  Badge,
+  Row,
+  Col,
+  Table,
+  Button,
+  Alert,
+  Placeholder,
+} from 'react-bootstrap';
 import {
   HourglassSplit,
   ArrowRepeat,
@@ -21,7 +30,12 @@ import { formatDate } from '../../utils/formatters';
  * @param {boolean} props.loading - Show loading state
  */
 const OcrQueueMonitor = ({ queueStatus, loading = false }) => {
-  const { pending = 0, processing = 0, failed = 0, failedTasks = [] } = queueStatus || {};
+  const {
+    pending = 0,
+    processing = 0,
+    failed = 0,
+    failedTasks = [],
+  } = queueStatus || {};
   const [retrying, setRetrying] = useState({});
   const [canceling, setCanceling] = useState({});
   const [actionError, setActionError] = useState(null);
@@ -47,7 +61,7 @@ const OcrQueueMonitor = ({ queueStatus, loading = false }) => {
       console.error(`Error retrying document ${documentId}:`, error);
       setActionError(
         error.response?.data?.message ||
-        `Failed to retry document ${documentId}. Please try again.`
+          `Failed to retry document ${documentId}. Please try again.`
       );
     } finally {
       setRetrying({ ...retrying, [documentId]: false });
@@ -68,7 +82,9 @@ const OcrQueueMonitor = ({ queueStatus, loading = false }) => {
 
     try {
       await cancelTask(documentId);
-      setActionSuccess(`Successfully canceled task for document ${documentId}.`);
+      setActionSuccess(
+        `Successfully canceled task for document ${documentId}.`
+      );
 
       // Optionally refresh the page data after a short delay
       setTimeout(() => {
@@ -78,7 +94,7 @@ const OcrQueueMonitor = ({ queueStatus, loading = false }) => {
       console.error(`Error canceling document ${documentId}:`, error);
       setActionError(
         error.response?.data?.message ||
-        `Failed to cancel task for document ${documentId}. Please try again.`
+          `Failed to cancel task for document ${documentId}. Please try again.`
       );
     } finally {
       setCanceling({ ...canceling, [documentId]: false });
@@ -118,7 +134,10 @@ const OcrQueueMonitor = ({ queueStatus, loading = false }) => {
                 <HourglassSplit size={32} />
               </div>
               <div>
-                <h6 className="text-muted mb-0 text-uppercase" style={{ fontSize: '0.75rem' }}>
+                <h6
+                  className="text-muted mb-0 text-uppercase"
+                  style={{ fontSize: '0.75rem' }}
+                >
                   Pending
                 </h6>
                 {loading ? (
@@ -138,7 +157,10 @@ const OcrQueueMonitor = ({ queueStatus, loading = false }) => {
                 <ArrowRepeat size={32} />
               </div>
               <div>
-                <h6 className="text-muted mb-0 text-uppercase" style={{ fontSize: '0.75rem' }}>
+                <h6
+                  className="text-muted mb-0 text-uppercase"
+                  style={{ fontSize: '0.75rem' }}
+                >
                   Processing
                 </h6>
                 {loading ? (
@@ -158,7 +180,10 @@ const OcrQueueMonitor = ({ queueStatus, loading = false }) => {
                 <XCircle size={32} />
               </div>
               <div>
-                <h6 className="text-muted mb-0 text-uppercase" style={{ fontSize: '0.75rem' }}>
+                <h6
+                  className="text-muted mb-0 text-uppercase"
+                  style={{ fontSize: '0.75rem' }}
+                >
                   Failed
                 </h6>
                 {loading ? (
@@ -175,14 +200,22 @@ const OcrQueueMonitor = ({ queueStatus, loading = false }) => {
 
         {/* Action Messages */}
         {actionSuccess && (
-          <Alert variant="success" dismissible onClose={() => setActionSuccess(null)}>
+          <Alert
+            variant="success"
+            dismissible
+            onClose={() => setActionSuccess(null)}
+          >
             <CheckCircle className="me-2" />
             {actionSuccess}
           </Alert>
         )}
 
         {actionError && (
-          <Alert variant="danger" dismissible onClose={() => setActionError(null)}>
+          <Alert
+            variant="danger"
+            dismissible
+            onClose={() => setActionError(null)}
+          >
             <ExclamationTriangle className="me-2" />
             {actionError}
           </Alert>
@@ -207,17 +240,25 @@ const OcrQueueMonitor = ({ queueStatus, loading = false }) => {
                   {failedTasks.map((task) => (
                     <tr key={task.id}>
                       <td>{task.id}</td>
-                      <td className="text-truncate" style={{ maxWidth: '200px' }}>
+                      <td
+                        className="text-truncate"
+                        style={{ maxWidth: '200px' }}
+                      >
                         {task.filename || 'Unknown'}
                       </td>
-                      <td className="text-truncate" style={{ maxWidth: '300px' }}>
+                      <td
+                        className="text-truncate"
+                        style={{ maxWidth: '300px' }}
+                      >
                         <small className="text-danger" title={task.error}>
                           {task.error || 'Unknown error'}
                         </small>
                       </td>
                       <td>
                         <small>
-                          {task.timestamp ? formatDate(task.timestamp) : 'Unknown'}
+                          {task.timestamp
+                            ? formatDate(task.timestamp)
+                            : 'Unknown'}
                         </small>
                       </td>
                       <td>

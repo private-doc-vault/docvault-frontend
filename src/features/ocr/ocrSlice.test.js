@@ -124,9 +124,7 @@ describe('ocrSlice', () => {
 
   describe('setOcrText', () => {
     it('should set OCR text for a document', () => {
-      store.dispatch(
-        setOcrText({ documentId: 1, text: 'Sample OCR text' })
-      );
+      store.dispatch(setOcrText({ documentId: 1, text: 'Sample OCR text' }));
 
       const state = store.getState().ocr;
       expect(state.ocrData[1].text).toBe('Sample OCR text');
@@ -136,9 +134,7 @@ describe('ocrSlice', () => {
 
   describe('setOcrError', () => {
     it('should set error and mark status as failed', () => {
-      store.dispatch(
-        setOcrError({ documentId: 1, error: 'Processing error' })
-      );
+      store.dispatch(setOcrError({ documentId: 1, error: 'Processing error' }));
 
       const state = store.getState().ocr;
       expect(state.ocrData[1].error).toBe('Processing error');

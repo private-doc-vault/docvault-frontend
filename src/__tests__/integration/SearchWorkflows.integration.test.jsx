@@ -232,7 +232,9 @@ describe('Search Workflow Integration Tests', () => {
       ];
 
       store.dispatch(setResults(page1Results));
-      store.dispatch(setPagination({ currentPage: 1, totalItems: 25, totalPages: 3 }));
+      store.dispatch(
+        setPagination({ currentPage: 1, totalItems: 25, totalPages: 3 })
+      );
 
       expect(store.getState().search.results).toEqual(page1Results);
 
@@ -256,7 +258,9 @@ describe('Search Workflow Integration Tests', () => {
     it('should handle saving and loading a search', () => {
       // Perform a search
       store.dispatch(setQuery('quarterly reports'));
-      store.dispatch(setFilters({ category: 'Report', dateFrom: '2024-01-01' }));
+      store.dispatch(
+        setFilters({ category: 'Report', dateFrom: '2024-01-01' })
+      );
 
       const searchQuery = store.getState().search.query;
       const searchFilters = store.getState().search.filters;
@@ -332,11 +336,15 @@ describe('Search Workflow Integration Tests', () => {
     it('should handle complete workflow: query -> filter -> paginate -> modify filters -> clear', () => {
       // Step 1: Initial search
       store.dispatch(setQuery('invoice'));
-      store.dispatch(setResults([
-        { id: 1, filename: 'inv1.pdf' },
-        { id: 2, filename: 'inv2.pdf' },
-      ]));
-      store.dispatch(setPagination({ currentPage: 1, totalItems: 100, totalPages: 5 }));
+      store.dispatch(
+        setResults([
+          { id: 1, filename: 'inv1.pdf' },
+          { id: 2, filename: 'inv2.pdf' },
+        ])
+      );
+      store.dispatch(
+        setPagination({ currentPage: 1, totalItems: 100, totalPages: 5 })
+      );
 
       expect(store.getState().search.results).toHaveLength(2);
       expect(store.getState().search.pagination.totalItems).toBe(100);

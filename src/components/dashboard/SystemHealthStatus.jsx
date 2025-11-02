@@ -41,7 +41,11 @@ const SystemHealthStatus = ({ systemHealth, loading = false }) => {
         );
       case 'degraded':
         return (
-          <Badge bg="warning" text="dark" className="d-flex align-items-center gap-2">
+          <Badge
+            bg="warning"
+            text="dark"
+            className="d-flex align-items-center gap-2"
+          >
             <ExclamationTriangleFill size={16} />
             <span>Degraded Performance</span>
           </Badge>
@@ -117,7 +121,7 @@ const SystemHealthStatus = ({ systemHealth, loading = false }) => {
     const { icon, color, label } = getServiceStatus(serviceData?.status);
     const displayName = serviceName
       .split(/(?=[A-Z])/)
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
 
     return (
@@ -180,7 +184,9 @@ const SystemHealthStatus = ({ systemHealth, loading = false }) => {
             </>
           ) : (
             <Col>
-              <p className="text-muted text-center mb-0">No service data available</p>
+              <p className="text-muted text-center mb-0">
+                No service data available
+              </p>
             </Col>
           )}
         </Row>

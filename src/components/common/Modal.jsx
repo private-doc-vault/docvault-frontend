@@ -72,7 +72,11 @@ const Modal = ({
     }
 
     if (footer) {
-      return <BootstrapModal.Footer className={footerClassName}>{footer}</BootstrapModal.Footer>;
+      return (
+        <BootstrapModal.Footer className={footerClassName}>
+          {footer}
+        </BootstrapModal.Footer>
+      );
     }
 
     // Default footer with cancel and confirm buttons
@@ -82,7 +86,11 @@ const Modal = ({
           <Button variant="secondary" onClick={handleCancel} disabled={loading}>
             {cancelText}
           </Button>
-          <Button variant={confirmVariant} onClick={handleConfirm} loading={loading}>
+          <Button
+            variant={confirmVariant}
+            onClick={handleConfirm}
+            loading={loading}
+          >
             {confirmText}
           </Button>
         </BootstrapModal.Footer>
@@ -110,11 +118,16 @@ const Modal = ({
       keyboard={keyboard}
       {...props}
     >
-      <BootstrapModal.Header closeButton={showCloseButton} className={headerClassName}>
+      <BootstrapModal.Header
+        closeButton={showCloseButton}
+        className={headerClassName}
+      >
         <BootstrapModal.Title>{title}</BootstrapModal.Title>
       </BootstrapModal.Header>
 
-      <BootstrapModal.Body className={bodyClassName}>{children}</BootstrapModal.Body>
+      <BootstrapModal.Body className={bodyClassName}>
+        {children}
+      </BootstrapModal.Body>
 
       {renderFooter()}
     </BootstrapModal>

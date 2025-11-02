@@ -79,8 +79,8 @@ class ErrorBoundary extends React.Component {
               Oops! Something went wrong
             </Alert.Heading>
             <p>
-              We&apos;re sorry, but something unexpected happened. The error has been logged
-              and we&apos;ll look into it.
+              We&apos;re sorry, but something unexpected happened. The error has
+              been logged and we&apos;ll look into it.
             </p>
 
             {/* Show error details in development mode */}
@@ -98,7 +98,10 @@ class ErrorBoundary extends React.Component {
                   {this.state.errorInfo && (
                     <>
                       <h6>Component Stack:</h6>
-                      <pre className="small text-muted" style={{ maxHeight: '300px', overflow: 'auto' }}>
+                      <pre
+                        className="small text-muted"
+                        style={{ maxHeight: '300px', overflow: 'auto' }}
+                      >
                         {this.state.errorInfo.componentStack}
                       </pre>
                     </>

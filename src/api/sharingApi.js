@@ -28,7 +28,10 @@ const sharingApi = {
    */
   createShare: async (documentId, shareData) => {
     try {
-      const response = await apiClient.post(`/documents/${documentId}/shares`, shareData);
+      const response = await apiClient.post(
+        `/documents/${documentId}/shares`,
+        shareData
+      );
       return response.data;
     } catch (error) {
       throw error;
@@ -93,7 +96,9 @@ const sharingApi = {
    */
   getUserPermissions: async (documentId) => {
     try {
-      const response = await apiClient.get(`/documents/${documentId}/my-permissions`);
+      const response = await apiClient.get(
+        `/documents/${documentId}/my-permissions`
+      );
       return response.data;
     } catch (error) {
       throw error;

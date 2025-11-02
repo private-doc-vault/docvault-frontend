@@ -363,9 +363,7 @@ describe('OCR Workflow Integration Tests', () => {
       store.dispatch(startPolling({ documentId }));
 
       // 2. API call fails (transient error)
-      ocrApi.fetchOcrStatus.mockRejectedValueOnce(
-        new Error('Network timeout')
-      );
+      ocrApi.fetchOcrStatus.mockRejectedValueOnce(new Error('Network timeout'));
 
       try {
         await ocrApi.fetchOcrStatus(documentId);

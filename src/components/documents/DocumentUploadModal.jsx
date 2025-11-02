@@ -27,7 +27,8 @@ const formatFileSize = (bytes) => {
   if (!bytes) return '0 B';
   if (bytes < 1024) return bytes + ' B';
   if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-  if (bytes < 1024 * 1024 * 1024) return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  if (bytes < 1024 * 1024 * 1024)
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
   return (bytes / (1024 * 1024 * 1024)).toFixed(1) + ' GB';
 };
 
@@ -138,7 +139,10 @@ const DocumentUploadModal = ({ show, onHide, onSuccess }) => {
     const uploadMetadata = {
       category: metadata.category || undefined,
       tags: metadata.tags
-        ? metadata.tags.split(',').map((tag) => tag.trim()).filter(Boolean)
+        ? metadata.tags
+            .split(',')
+            .map((tag) => tag.trim())
+            .filter(Boolean)
         : undefined,
     };
 
@@ -162,7 +166,9 @@ const DocumentUploadModal = ({ show, onHide, onSuccess }) => {
     const progressValues = Object.values(uploadProgress);
     if (progressValues.length === 0) return null;
 
-    const completed = progressValues.filter((p) => p.status === 'completed').length;
+    const completed = progressValues.filter(
+      (p) => p.status === 'completed'
+    ).length;
     const failed = progressValues.filter((p) => p.status === 'failed').length;
     const total = progressValues.length;
 
@@ -174,7 +180,12 @@ const DocumentUploadModal = ({ show, onHide, onSuccess }) => {
   const uploadComplete = isUploadComplete();
 
   return (
-    <Modal show={show} onHide={onHide} size="lg" backdrop={uploading ? 'static' : true}>
+    <Modal
+      show={show}
+      onHide={onHide}
+      size="lg"
+      backdrop={uploading ? 'static' : true}
+    >
       <Modal.Header closeButton={!uploading}>
         <Modal.Title>Upload Documents</Modal.Title>
       </Modal.Header>
@@ -218,7 +229,9 @@ const DocumentUploadModal = ({ show, onHide, onSuccess }) => {
           <>
             <div className="mb-3">
               <div className="d-flex justify-content-between align-items-center mb-2">
-                <h6 className="mb-0">Selected Files ({selectedFiles.length})</h6>
+                <h6 className="mb-0">
+                  Selected Files ({selectedFiles.length})
+                </h6>
                 <Button
                   variant="outline-primary"
                   size="sm"
@@ -344,8 +357,8 @@ const DocumentUploadModal = ({ show, onHide, onSuccess }) => {
                         progress.status === 'completed'
                           ? 'success'
                           : progress.status === 'failed'
-                          ? 'danger'
-                          : 'primary'
+                            ? 'danger'
+                            : 'primary'
                       }
                     >
                       {progress.status}
@@ -355,7 +368,10 @@ const DocumentUploadModal = ({ show, onHide, onSuccess }) => {
                     <ProgressBar now={progress.progress} animated />
                   )}
                   {uploadErrors[fileId] && (
-                    <Alert variant="danger" className="mt-2 mb-0 py-1 px-2 small">
+                    <Alert
+                      variant="danger"
+                      className="mt-2 mb-0 py-1 px-2 small"
+                    >
                       {uploadErrors[fileId]}
                     </Alert>
                   )}
@@ -369,7 +385,8 @@ const DocumentUploadModal = ({ show, onHide, onSuccess }) => {
                 variant={uploadStatus.failed > 0 ? 'warning' : 'success'}
                 className="mt-3 mb-0"
               >
-                <strong>Upload Complete:</strong> {uploadStatus.completed} succeeded
+                <strong>Upload Complete:</strong> {uploadStatus.completed}{' '}
+                succeeded
                 {uploadStatus.failed > 0 && `, ${uploadStatus.failed} failed`}
               </Alert>
             )}
@@ -383,7 +400,8 @@ const DocumentUploadModal = ({ show, onHide, onSuccess }) => {
         </Button>
         {!uploading && selectedFiles.length > 0 && (
           <Button variant="primary" onClick={handleUpload}>
-            Upload {selectedFiles.length} {selectedFiles.length === 1 ? 'File' : 'Files'}
+            Upload {selectedFiles.length}{' '}
+            {selectedFiles.length === 1 ? 'File' : 'Files'}
           </Button>
         )}
       </Modal.Footer>

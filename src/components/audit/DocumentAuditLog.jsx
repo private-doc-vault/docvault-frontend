@@ -77,7 +77,11 @@ const DocumentAuditLog = ({ documentId }) => {
             <p className="mb-0">{error}</p>
             <hr />
             <div className="d-flex justify-content-end">
-              <Button variant="outline-danger" size="sm" onClick={handleRefresh}>
+              <Button
+                variant="outline-danger"
+                size="sm"
+                onClick={handleRefresh}
+              >
                 Retry
               </Button>
             </div>
@@ -102,8 +106,13 @@ const DocumentAuditLog = ({ documentId }) => {
       <Card.Body>
         {logs.length === 0 ? (
           <div className="text-center py-4">
-            <i className="bi bi-file-text" style={{ fontSize: '2rem', color: '#dee2e6' }}></i>
-            <p className="mt-3 text-muted mb-0">No audit logs found for this document</p>
+            <i
+              className="bi bi-file-text"
+              style={{ fontSize: '2rem', color: '#dee2e6' }}
+            ></i>
+            <p className="mt-3 text-muted mb-0">
+              No audit logs found for this document
+            </p>
           </div>
         ) : (
           <>
@@ -128,7 +137,8 @@ const DocumentAuditLog = ({ documentId }) => {
 };
 
 DocumentAuditLog.propTypes = {
-  documentId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  documentId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
 };
 
 export default DocumentAuditLog;

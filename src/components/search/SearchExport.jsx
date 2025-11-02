@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import { Dropdown, Button, Spinner } from 'react-bootstrap';
-import { Download, FileEarmarkText, FiletypeCsv, FiletypePdf, FileEarmarkCode } from 'react-bootstrap-icons';
+import {
+  Download,
+  FileEarmarkText,
+  FiletypeCsv,
+  FiletypePdf,
+  FileEarmarkCode,
+} from 'react-bootstrap-icons';
 import { useSelector } from 'react-redux';
 import { selectQuery, selectFilters } from '../../features/search/searchSlice';
 import searchApi from '../../api/searchApi';
@@ -54,7 +60,8 @@ const SearchExport = () => {
   };
 
   // Check if there's anything to export
-  const hasSearchCriteria = query.trim() || Object.values(filters).some(v => v);
+  const hasSearchCriteria =
+    query.trim() || Object.values(filters).some((v) => v);
 
   return (
     <Dropdown>
@@ -79,18 +86,12 @@ const SearchExport = () => {
       <Dropdown.Menu>
         <Dropdown.Header>Export Format</Dropdown.Header>
 
-        <Dropdown.Item
-          onClick={() => handleExport('csv')}
-          disabled={exporting}
-        >
+        <Dropdown.Item onClick={() => handleExport('csv')} disabled={exporting}>
           <FiletypeCsv className="me-2" />
           CSV (Comma-separated values)
         </Dropdown.Item>
 
-        <Dropdown.Item
-          onClick={() => handleExport('pdf')}
-          disabled={exporting}
-        >
+        <Dropdown.Item onClick={() => handleExport('pdf')} disabled={exporting}>
           <FiletypePdf className="me-2" />
           PDF (Portable Document Format)
         </Dropdown.Item>

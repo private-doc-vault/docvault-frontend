@@ -20,10 +20,17 @@ const getActionBadge = (action) => {
     logout: { variant: 'secondary', icon: 'bi-box-arrow-right' },
   };
 
-  const badge = badges[action?.toLowerCase()] || { variant: 'secondary', icon: 'bi-info-circle' };
+  const badge = badges[action?.toLowerCase()] || {
+    variant: 'secondary',
+    icon: 'bi-info-circle',
+  };
 
   return (
-    <Badge bg={badge.variant} className="d-flex align-items-center gap-1" style={{ width: 'fit-content' }}>
+    <Badge
+      bg={badge.variant}
+      className="d-flex align-items-center gap-1"
+      style={{ width: 'fit-content' }}
+    >
       <i className={badge.icon}></i>
       <span>{action}</span>
     </Badge>
@@ -104,9 +111,7 @@ const AuditLogTable = ({ logs }) => {
                   <span className="text-muted">System</span>
                 )}
               </td>
-              <td>
-                {getActionBadge(log.action)}
-              </td>
+              <td>{getActionBadge(log.action)}</td>
               <td>
                 {log.documentId ? (
                   <span
@@ -121,7 +126,9 @@ const AuditLogTable = ({ logs }) => {
                     }}
                     tabIndex={0}
                   >
-                    {log.documentName || log.documentFilename || `Document #${log.documentId}`}
+                    {log.documentName ||
+                      log.documentFilename ||
+                      `Document #${log.documentId}`}
                   </span>
                 ) : (
                   <span className="text-muted">—</span>

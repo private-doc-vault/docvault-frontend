@@ -23,7 +23,11 @@ jest.mock('../../components/dashboard/SystemHealthStatus', () => ({
   __esModule: true,
   default: ({ systemHealth, loading }) => (
     <div data-testid="system-health">
-      {loading ? <div>Loading...</div> : <div>Status: {systemHealth.status}</div>}
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <div>Status: {systemHealth.status}</div>
+      )}
     </div>
   ),
 }));
@@ -36,8 +40,8 @@ jest.mock('../../components/dashboard/OcrQueueMonitor', () => ({
         <div>Loading...</div>
       ) : (
         <div>
-          Pending: {queueStatus.pending}, Processing: {queueStatus.processing}, Failed:{' '}
-          {queueStatus.failed}
+          Pending: {queueStatus.pending}, Processing: {queueStatus.processing},
+          Failed: {queueStatus.failed}
         </div>
       )}
     </div>
@@ -154,7 +158,9 @@ describe('AdminDashboardPage', () => {
 
       await waitFor(() => {
         const systemHealth = screen.getByTestId('system-health');
-        expect(within(systemHealth).getByText(/Status: healthy/i)).toBeInTheDocument();
+        expect(
+          within(systemHealth).getByText(/Status: healthy/i)
+        ).toBeInTheDocument();
       });
     });
 
@@ -164,7 +170,9 @@ describe('AdminDashboardPage', () => {
       await waitFor(() => {
         const queueMonitor = screen.getByTestId('ocr-queue-monitor');
         expect(
-          within(queueMonitor).getByText(/Pending: 5, Processing: 2, Failed: 1/i)
+          within(queueMonitor).getByText(
+            /Pending: 5, Processing: 2, Failed: 1/i
+          )
         ).toBeInTheDocument();
       });
     });
@@ -182,7 +190,9 @@ describe('AdminDashboardPage', () => {
       renderWithProviders(<AdminDashboardPage />);
 
       await waitFor(() => {
-        expect(screen.getByText('Recent Errors & Warnings')).toBeInTheDocument();
+        expect(
+          screen.getByText('Recent Errors & Warnings')
+        ).toBeInTheDocument();
         expect(screen.getByText(/OCR_ERROR:/i)).toBeInTheDocument();
         expect(screen.getByText(/OCR processing failed/i)).toBeInTheDocument();
       });
@@ -194,24 +204,32 @@ describe('AdminDashboardPage', () => {
       renderWithProviders(<AdminDashboardPage />);
 
       await waitFor(() => {
-        expect(screen.queryByText('Recent Errors & Warnings')).not.toBeInTheDocument();
+        expect(
+          screen.queryByText('Recent Errors & Warnings')
+        ).not.toBeInTheDocument();
       });
     });
   });
 
   describe('Error Handling', () => {
     it('should display error message when API calls fail', async () => {
-      dashboardApi.fetchDashboardMetrics.mockRejectedValue(new Error('API Error'));
+      dashboardApi.fetchDashboardMetrics.mockRejectedValue(
+        new Error('API Error')
+      );
 
       renderWithProviders(<AdminDashboardPage />);
 
       await waitFor(() => {
-        expect(screen.getByText(/Failed to load.*dashboard section/i)).toBeInTheDocument();
+        expect(
+          screen.getByText(/Failed to load.*dashboard section/i)
+        ).toBeInTheDocument();
       });
     });
 
     it('should still display successful data when some API calls fail', async () => {
-      dashboardApi.fetchDashboardMetrics.mockRejectedValue(new Error('API Error'));
+      dashboardApi.fetchDashboardMetrics.mockRejectedValue(
+        new Error('API Error')
+      );
       // Other API calls succeed
 
       renderWithProviders(<AdminDashboardPage />);
@@ -258,7 +276,9 @@ describe('AdminDashboardPage', () => {
 
       // Click refresh button (get all buttons and find the specific one)
       const buttons = screen.getAllByRole('button');
-      const refreshButton = buttons.find(btn => btn.textContent.trim().match(/^Refresh$/i));
+      const refreshButton = buttons.find((btn) =>
+        btn.textContent.trim().match(/^Refresh$/i)
+      );
       await user.click(refreshButton);
 
       // Should fetch again
@@ -353,7 +373,9 @@ describe('AdminDashboardPage', () => {
 
       // 2. Manual refresh
       const buttons = screen.getAllByRole('button');
-      const refreshButton = buttons.find(btn => btn.textContent.trim().match(/^Refresh$/i));
+      const refreshButton = buttons.find((btn) =>
+        btn.textContent.trim().match(/^Refresh$/i)
+      );
       await user.click(refreshButton);
 
       await waitFor(() => {
@@ -379,7 +401,9 @@ describe('AdminDashboardPage', () => {
         expect(screen.getByTestId('ocr-queue-monitor')).toBeInTheDocument();
 
         // Should show warning about partial failure
-        expect(screen.getByText(/Failed to load.*dashboard section/i)).toBeInTheDocument();
+        expect(
+          screen.getByText(/Failed to load.*dashboard section/i)
+        ).toBeInTheDocument();
       });
     });
   });

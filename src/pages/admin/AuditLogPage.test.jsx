@@ -62,9 +62,7 @@ const renderWithProviders = (component, initialState = {}) => {
   return {
     ...render(
       <Provider store={store}>
-        <BrowserRouter>
-          {component}
-        </BrowserRouter>
+        <BrowserRouter>{component}</BrowserRouter>
       </Provider>
     ),
     store,
@@ -95,7 +93,9 @@ describe('AuditLogPage Integration Tests', () => {
 
       // Wait for data to load
       await waitFor(() => {
-        expect(screen.queryByText(/Loading audit logs/i)).not.toBeInTheDocument();
+        expect(
+          screen.queryByText(/Loading audit logs/i)
+        ).not.toBeInTheDocument();
       });
 
       // Should display logs (use getAllByText for items that appear multiple times)
@@ -116,7 +116,9 @@ describe('AuditLogPage Integration Tests', () => {
       renderWithProviders(<AuditLogPage />);
 
       await waitFor(() => {
-        expect(screen.getByText(/Failed to fetch audit logs/i)).toBeInTheDocument();
+        expect(
+          screen.getByText(/Failed to fetch audit logs/i)
+        ).toBeInTheDocument();
       });
     });
 
@@ -165,7 +167,9 @@ describe('AuditLogPage Integration Tests', () => {
       fireEvent.change(actionSelect, { target: { value: 'create' } });
 
       // Click Apply Filters button
-      const applyButton = screen.getByRole('button', { name: /Apply Filters/i });
+      const applyButton = screen.getByRole('button', {
+        name: /Apply Filters/i,
+      });
       fireEvent.click(applyButton);
 
       // Should call API with filters

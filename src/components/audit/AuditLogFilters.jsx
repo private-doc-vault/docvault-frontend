@@ -72,7 +72,11 @@ const AuditLogFilters = ({ filters, onFilterChange, onReset }) => {
               type="date"
               value={formatDateForInput(localFilters.startDate)}
               onChange={(e) => handleInputChange('startDate', e.target.value)}
-              max={localFilters.endDate ? formatDateForInput(localFilters.endDate) : undefined}
+              max={
+                localFilters.endDate
+                  ? formatDateForInput(localFilters.endDate)
+                  : undefined
+              }
             />
           </Form.Group>
         </Col>
@@ -84,7 +88,11 @@ const AuditLogFilters = ({ filters, onFilterChange, onReset }) => {
               type="date"
               value={formatDateForInput(localFilters.endDate)}
               onChange={(e) => handleInputChange('endDate', e.target.value)}
-              min={localFilters.startDate ? formatDateForInput(localFilters.startDate) : undefined}
+              min={
+                localFilters.startDate
+                  ? formatDateForInput(localFilters.startDate)
+                  : undefined
+              }
             />
           </Form.Group>
         </Col>
@@ -136,7 +144,11 @@ const AuditLogFilters = ({ filters, onFilterChange, onReset }) => {
             <i className="bi bi-funnel me-2"></i>
             Apply Filters
           </Button>
-          <Button type="button" variant="outline-secondary" onClick={handleReset}>
+          <Button
+            type="button"
+            variant="outline-secondary"
+            onClick={handleReset}
+          >
             <i className="bi bi-x-circle me-2"></i>
             Reset
           </Button>

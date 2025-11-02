@@ -40,7 +40,15 @@ const PermissionMatrix = ({ roles, permissions, rolePermissions }) => {
       <Table bordered hover className="permission-matrix">
         <thead className="table-light">
           <tr>
-            <th style={{ width: '200px', position: 'sticky', left: 0, backgroundColor: '#f8f9fa', zIndex: 2 }}>
+            <th
+              style={{
+                width: '200px',
+                position: 'sticky',
+                left: 0,
+                backgroundColor: '#f8f9fa',
+                zIndex: 2,
+              }}
+            >
               Role / Permission
             </th>
             {permissions.map((permission) => (
@@ -161,9 +169,7 @@ PermissionMatrix.propTypes = {
     })
   ).isRequired,
   rolePermissions: PropTypes.objectOf(
-    PropTypes.arrayOf(
-      PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-    )
+    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number]))
   ).isRequired,
 };
 

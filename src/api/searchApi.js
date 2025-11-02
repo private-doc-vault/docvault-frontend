@@ -33,7 +33,8 @@ const searchApi = {
       if (filters.category) payload.filters.category = filters.category;
       if (filters.dateFrom) payload.filters.dateFrom = filters.dateFrom;
       if (filters.dateTo) payload.filters.dateTo = filters.dateTo;
-      if (filters.documentType) payload.filters.documentType = filters.documentType;
+      if (filters.documentType)
+        payload.filters.documentType = filters.documentType;
 
       const response = await apiClient.post('/search', payload);
       return response.data;
@@ -63,7 +64,8 @@ const searchApi = {
       if (filters.category) queryParams.append('category', filters.category);
       if (filters.dateFrom) queryParams.append('dateFrom', filters.dateFrom);
       if (filters.dateTo) queryParams.append('dateTo', filters.dateTo);
-      if (filters.documentType) queryParams.append('documentType', filters.documentType);
+      if (filters.documentType)
+        queryParams.append('documentType', filters.documentType);
 
       const response = await apiClient.get(
         `/search/export?${queryParams.toString()}`,
@@ -119,7 +121,10 @@ const searchApi = {
    */
   updateSavedSearch: async (searchId, updates) => {
     try {
-      const response = await apiClient.put(`/saved-searches/${searchId}`, updates);
+      const response = await apiClient.put(
+        `/saved-searches/${searchId}`,
+        updates
+      );
       return response.data;
     } catch (error) {
       throw error;
@@ -148,10 +153,13 @@ const searchApi = {
    */
   executeSavedSearch: async (searchId, limit = 20, offset = 0) => {
     try {
-      const response = await apiClient.post(`/saved-searches/${searchId}/execute`, {
-        limit,
-        offset,
-      });
+      const response = await apiClient.post(
+        `/saved-searches/${searchId}/execute`,
+        {
+          limit,
+          offset,
+        }
+      );
       return response.data;
     } catch (error) {
       throw error;

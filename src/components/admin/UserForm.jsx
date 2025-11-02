@@ -3,15 +3,7 @@ import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import {
-  Modal,
-  Form,
-  Button,
-  Alert,
-  Spinner,
-  Row,
-  Col,
-} from 'react-bootstrap';
+import { Modal, Form, Button, Alert, Spinner, Row, Col } from 'react-bootstrap';
 import { Save, X } from 'react-bootstrap-icons';
 import usersApi from '../../api/usersApi';
 
@@ -36,7 +28,10 @@ const createUserSchema = yup.object().shape({
     .required('Username is required')
     .min(3, 'Username must be at least 3 characters')
     .max(50, 'Username must not exceed 50 characters')
-    .matches(/^[a-zA-Z0-9_-]+$/, 'Username can only contain letters, numbers, underscores, and hyphens'),
+    .matches(
+      /^[a-zA-Z0-9_-]+$/,
+      'Username can only contain letters, numbers, underscores, and hyphens'
+    ),
   email: yup
     .string()
     .required('Email is required')
@@ -69,7 +64,10 @@ const editUserSchema = yup.object().shape({
     .required('Username is required')
     .min(3, 'Username must be at least 3 characters')
     .max(50, 'Username must not exceed 50 characters')
-    .matches(/^[a-zA-Z0-9_-]+$/, 'Username can only contain letters, numbers, underscores, and hyphens'),
+    .matches(
+      /^[a-zA-Z0-9_-]+$/,
+      'Username can only contain letters, numbers, underscores, and hyphens'
+    ),
   email: yup
     .string()
     .required('Email is required')
@@ -177,8 +175,8 @@ const UserForm = ({ show, onHide, user, onSuccess }) => {
       console.error('Failed to save user:', err);
       setError(
         err.response?.data?.message ||
-        err.response?.data?.error ||
-        `Failed to ${isEditMode ? 'update' : 'create'} user`
+          err.response?.data?.error ||
+          `Failed to ${isEditMode ? 'update' : 'create'} user`
       );
     } finally {
       setSubmitting(false);
@@ -217,7 +215,9 @@ const UserForm = ({ show, onHide, user, onSuccess }) => {
             {/* Username */}
             <Col md={6}>
               <Form.Group className="mb-3" controlId="username">
-                <Form.Label>Username <span className="text-danger">*</span></Form.Label>
+                <Form.Label>
+                  Username <span className="text-danger">*</span>
+                </Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter username"
@@ -238,7 +238,9 @@ const UserForm = ({ show, onHide, user, onSuccess }) => {
             {/* Email */}
             <Col md={6}>
               <Form.Group className="mb-3" controlId="email">
-                <Form.Label>Email <span className="text-danger">*</span></Form.Label>
+                <Form.Label>
+                  Email <span className="text-danger">*</span>
+                </Form.Label>
                 <Form.Control
                   type="email"
                   placeholder="Enter email address"
@@ -259,11 +261,16 @@ const UserForm = ({ show, onHide, user, onSuccess }) => {
             <Col md={12}>
               <Form.Group className="mb-3" controlId="password">
                 <Form.Label>
-                  Password {!isEditMode && <span className="text-danger">*</span>}
+                  Password{' '}
+                  {!isEditMode && <span className="text-danger">*</span>}
                 </Form.Label>
                 <Form.Control
                   type="password"
-                  placeholder={isEditMode ? 'Leave blank to keep current password' : 'Enter password'}
+                  placeholder={
+                    isEditMode
+                      ? 'Leave blank to keep current password'
+                      : 'Enter password'
+                  }
                   {...register('password')}
                   isInvalid={!!errors.password}
                   disabled={submitting}
@@ -273,10 +280,9 @@ const UserForm = ({ show, onHide, user, onSuccess }) => {
                   {errors.password?.message}
                 </Form.Control.Feedback>
                 <Form.Text className="text-muted">
-                  {isEditMode
-                    ? 'Leave blank to keep current password. '
-                    : ''}
-                  Minimum 8 characters, must include uppercase, lowercase, and number
+                  {isEditMode ? 'Leave blank to keep current password. ' : ''}
+                  Minimum 8 characters, must include uppercase, lowercase, and
+                  number
                 </Form.Text>
               </Form.Group>
             </Col>
@@ -286,7 +292,9 @@ const UserForm = ({ show, onHide, user, onSuccess }) => {
             {/* Roles */}
             <Col md={6}>
               <Form.Group className="mb-3">
-                <Form.Label>Roles <span className="text-danger">*</span></Form.Label>
+                <Form.Label>
+                  Roles <span className="text-danger">*</span>
+                </Form.Label>
                 {AVAILABLE_ROLES.map((role) => (
                   <Form.Check
                     key={role.value}
@@ -303,7 +311,10 @@ const UserForm = ({ show, onHide, user, onSuccess }) => {
                     {...register('roles')}
                     checked={selectedRoles?.includes(role.value)}
                     onChange={(e) => {
-                      const newRoles = handleRoleChange(role.value, e.target.checked);
+                      const newRoles = handleRoleChange(
+                        role.value,
+                        e.target.checked
+                      );
                       reset({ ...watch(), roles: newRoles });
                     }}
                     disabled={submitting}
@@ -321,7 +332,9 @@ const UserForm = ({ show, onHide, user, onSuccess }) => {
             {/* Status */}
             <Col md={6}>
               <Form.Group className="mb-3" controlId="status">
-                <Form.Label>Status <span className="text-danger">*</span></Form.Label>
+                <Form.Label>
+                  Status <span className="text-danger">*</span>
+                </Form.Label>
                 {AVAILABLE_STATUSES.map((status) => (
                   <Form.Check
                     key={status.value}
@@ -344,19 +357,11 @@ const UserForm = ({ show, onHide, user, onSuccess }) => {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={onHide}
-            disabled={submitting}
-          >
+          <Button variant="secondary" onClick={onHide} disabled={submitting}>
             <X className="me-2" />
             Cancel
           </Button>
-          <Button
-            variant="primary"
-            type="submit"
-            disabled={submitting}
-          >
+          <Button variant="primary" type="submit" disabled={submitting}>
             {submitting ? (
               <>
                 <Spinner

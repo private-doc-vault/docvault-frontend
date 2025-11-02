@@ -52,7 +52,10 @@ const usersSlice = createSlice({
     deleteUser: (state, action) => {
       const userId = action.payload;
       state.users = state.users.filter((user) => user.id !== userId);
-      state.pagination.totalItems = Math.max(0, state.pagination.totalItems - 1);
+      state.pagination.totalItems = Math.max(
+        0,
+        state.pagination.totalItems - 1
+      );
       // Clear selectedUser if it was deleted
       if (state.selectedUser?.id === userId) {
         state.selectedUser = null;

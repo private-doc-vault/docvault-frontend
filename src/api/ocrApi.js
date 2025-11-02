@@ -24,10 +24,15 @@ const ocrApi = {
    */
   fetchOcrStatus: async (documentId) => {
     try {
-      const response = await apiClient.get(`/documents/${documentId}/ocr-status`);
+      const response = await apiClient.get(
+        `/documents/${documentId}/ocr-status`
+      );
       return response.data;
     } catch (error) {
-      console.error(`Failed to fetch OCR status for document ${documentId}:`, error);
+      console.error(
+        `Failed to fetch OCR status for document ${documentId}:`,
+        error
+      );
       throw error;
     }
   },
@@ -48,7 +53,10 @@ const ocrApi = {
       const response = await apiClient.get(`/documents/${documentId}/ocr-text`);
       return response.data;
     } catch (error) {
-      console.error(`Failed to fetch OCR text for document ${documentId}:`, error);
+      console.error(
+        `Failed to fetch OCR text for document ${documentId}:`,
+        error
+      );
       throw error;
     }
   },
@@ -64,10 +72,15 @@ const ocrApi = {
    */
   retryOcrProcessing: async (documentId) => {
     try {
-      const response = await apiClient.post(`/documents/${documentId}/retry-processing`);
+      const response = await apiClient.post(
+        `/documents/${documentId}/retry-processing`
+      );
       return response.data;
     } catch (error) {
-      console.error(`Failed to retry OCR processing for document ${documentId}:`, error);
+      console.error(
+        `Failed to retry OCR processing for document ${documentId}:`,
+        error
+      );
       throw error;
     }
   },
@@ -89,10 +102,15 @@ const ocrApi = {
    */
   fetchProcessingHistory: async (documentId) => {
     try {
-      const response = await apiClient.get(`/documents/${documentId}/processing-history`);
+      const response = await apiClient.get(
+        `/documents/${documentId}/processing-history`
+      );
       return response.data;
     } catch (error) {
-      console.error(`Failed to fetch processing history for document ${documentId}:`, error);
+      console.error(
+        `Failed to fetch processing history for document ${documentId}:`,
+        error
+      );
       throw error;
     }
   },
@@ -128,10 +146,15 @@ const ocrApi = {
    */
   cancelOcrProcessing: async (documentId) => {
     try {
-      const response = await apiClient.post(`/documents/${documentId}/cancel-processing`);
+      const response = await apiClient.post(
+        `/documents/${documentId}/cancel-processing`
+      );
       return response.data;
     } catch (error) {
-      console.error(`Failed to cancel OCR processing for document ${documentId}:`, error);
+      console.error(
+        `Failed to cancel OCR processing for document ${documentId}:`,
+        error
+      );
       throw error;
     }
   },

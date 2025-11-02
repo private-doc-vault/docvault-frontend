@@ -82,7 +82,10 @@ const Sidebar = ({ show, onHide, isMobile = false }) => {
 
   // Desktop view: Fixed sidebar
   return (
-    <div className="sidebar bg-light border-end" style={{ width: '250px', minHeight: '100vh' }}>
+    <div
+      className="sidebar bg-light border-end"
+      style={{ width: '250px', minHeight: '100vh' }}
+    >
       <div className="sidebar-header p-3 border-bottom">
         <h5 className="mb-0">Admin Panel</h5>
       </div>

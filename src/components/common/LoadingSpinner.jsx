@@ -9,7 +9,12 @@ import { Spinner } from 'react-bootstrap';
  * @param {string} props.message - Optional loading message
  * @param {boolean} props.center - Center the spinner (default: true)
  */
-const LoadingSpinner = ({ size, variant = 'primary', message, center = true }) => {
+const LoadingSpinner = ({
+  size,
+  variant = 'primary',
+  message,
+  center = true,
+}) => {
   const spinnerElement = (
     <>
       <Spinner

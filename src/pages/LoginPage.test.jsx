@@ -80,7 +80,9 @@ describe('LoginPage Integration Tests', () => {
       expect(screen.getByText('Sign in to your account')).toBeInTheDocument();
       expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
       expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /sign in/i })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /sign in/i })
+      ).toBeInTheDocument();
       expect(screen.getByText(/don't have an account/i)).toBeInTheDocument();
       expect(screen.getByText(/forgot password/i)).toBeInTheDocument();
     });
@@ -119,7 +121,9 @@ describe('LoginPage Integration Tests', () => {
       await user.tab();
 
       await waitFor(() => {
-        expect(screen.getByText(/please enter a valid email address/i)).toBeInTheDocument();
+        expect(
+          screen.getByText(/please enter a valid email address/i)
+        ).toBeInTheDocument();
       });
     });
 
@@ -147,7 +151,9 @@ describe('LoginPage Integration Tests', () => {
       await user.tab();
 
       await waitFor(() => {
-        expect(screen.getByText(/password must be at least 6 characters/i)).toBeInTheDocument();
+        expect(
+          screen.getByText(/password must be at least 6 characters/i)
+        ).toBeInTheDocument();
       });
     });
 
@@ -207,7 +213,9 @@ describe('LoginPage Integration Tests', () => {
 
     it('should disable form during submission', async () => {
       const user = userEvent.setup();
-      authApi.login.mockImplementation(() => new Promise(resolve => setTimeout(resolve, 100)));
+      authApi.login.mockImplementation(
+        () => new Promise((resolve) => setTimeout(resolve, 100))
+      );
 
       renderLoginPage();
 
@@ -220,7 +228,9 @@ describe('LoginPage Integration Tests', () => {
       await user.click(submitButton);
 
       // Button should show loading state
-      expect(screen.getByRole('button', { name: /signing in/i })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /signing in/i })
+      ).toBeInTheDocument();
 
       // Inputs should be disabled
       expect(emailInput).toBeDisabled();
@@ -229,7 +239,9 @@ describe('LoginPage Integration Tests', () => {
 
     it('should show loading state on submit button', async () => {
       const user = userEvent.setup();
-      authApi.login.mockImplementation(() => new Promise(resolve => setTimeout(resolve, 100)));
+      authApi.login.mockImplementation(
+        () => new Promise((resolve) => setTimeout(resolve, 100))
+      );
 
       renderLoginPage();
 
@@ -241,7 +253,9 @@ describe('LoginPage Integration Tests', () => {
       await user.type(passwordInput, mockCredentials.password);
       await user.click(submitButton);
 
-      expect(screen.getByRole('button', { name: /signing in/i })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /signing in/i })
+      ).toBeInTheDocument();
     });
   });
 
@@ -291,7 +305,9 @@ describe('LoginPage Integration Tests', () => {
       await user.click(submitButton);
 
       await waitFor(() => {
-        expect(screen.getByText(/login failed. please try again/i)).toBeInTheDocument();
+        expect(
+          screen.getByText(/login failed. please try again/i)
+        ).toBeInTheDocument();
       });
     });
 

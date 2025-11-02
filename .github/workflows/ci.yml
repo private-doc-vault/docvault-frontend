@@ -1,0 +1,80 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-and-build:
+    name: Test & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Check code formatting
+        run: npm run format:check
+
+      - name: Run tests with coverage
+        run: npm run test:coverage
+
+      - name: Check coverage threshold (70%)
+        run: |
+          COVERAGE=$(npm run test:coverage --silent | grep "All files" | awk '{print $10}' | sed 's/%//')
+          if [ $(echo "$COVERAGE < 70" | bc) -eq 1 ]; then
+            echo "Coverage is below 70%: ${COVERAGE}%"
+            exit 1
+          fi
+          echo "Coverage is adequate: ${COVERAGE}%"
+
+      - name: Build application
+        run: npm run build
+        env:
+          VITE_API_URL: /api
+          VITE_APP_VERSION: ci-build
+
+      - name: Check build output
+        run: |
+          if [ ! -d "dist" ]; then
+            echo "Build failed - dist directory not found"
+            exit 1
+          fi
+          echo "Build successful - dist directory created"
+          ls -lah dist/
+
+      - name: Build Docker image
+        run: docker build -t docvault-frontend:test .
+
+      - name: Test Docker image
+        run: |
+          docker run --rm -d --name frontend-test -p 8080:80 docvault-frontend:test
+          sleep 5
+          curl -f http://localhost:8080 || exit 1
+          docker stop frontend-test
+          echo "Docker image test successful"
+
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v3
+        if: always()
+        with:
+          files: ./coverage/coverage-final.json
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: false

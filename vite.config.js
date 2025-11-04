@@ -12,7 +12,7 @@ export default defineConfig({
     },
     proxy: {
       '/api': {
-        target: 'http://backend:9000', // Backend service in Docker network
+        target: 'http://nginx', // Nginx reverse proxy (not PHP-FPM directly)
         changeOrigin: true,
         secure: false,
       }
